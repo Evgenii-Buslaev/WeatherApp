@@ -1,19 +1,20 @@
+// getting needed DOM-elements
 let cityName = document.getElementById("city");
 let locationBtn = document.getElementById("location-btn");
 
-
+// object for current state
 let city = {
   lat: null,
   lng: null,
   city_defined: false,
 }
 
+// function for getting user's location
 function getLocation() {
-  // getting coords of user
   navigator.geolocation.getCurrentPosition(function (position) {
     city.lat = position.coords.latitude;
     city.lng = position.coords.longitude;
-    // defining city with coords
+    
     let url =
       "https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address";
     let token = "7b0d07bc549fc06afcf392d74f2aa6beb81a784a";
@@ -29,6 +30,7 @@ function getLocation() {
       },
       body: JSON.stringify(query),
     };
+
     // changing city name to current city (without a prefix)
     fetch(url, options)
       .then((response) => response.json())
@@ -44,11 +46,8 @@ function getLocation() {
   });
 }
 
-// getting user's location name 
-locationBtn.addEventListener("click", getLocation);
-
-window.addEventListener('load', () => {
-  getLocation();
+// function for getting current weather
+function getAPIData() {
   let check = setInterval(() => {
     if (city.city_defined === true) {
       
@@ -61,5 +60,29 @@ window.addEventListener('load', () => {
       clearInterval(check)
       }
     }, 100)
-  })
+}
+
+let question = confirm('Определить Ваш город автоматически?')
+
+if (question) {
+  getLocation()
+} else {
+  cityName.innerText = 'Москва'
+  city.city_defined = true
+}
+
+// events
+window.addEventListener('load', getAPIData)
+
+
+locationBtn.addEventListener("click", () => {
+ city.city_defined = false
+ getLocation()
+ let check = setInterval(() => {
+  if (city.city_defined === true) {
+    getAPIData()
+    clearInterval(check)
+  }
+ }, 100)
+});
 
