@@ -77,8 +77,8 @@
 
 .main-states {
   display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
+  justify-content: start;
+  margin-left: 2rem;
 }
 
 #temperature {
@@ -177,5 +177,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+  .main-states {
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
 }
