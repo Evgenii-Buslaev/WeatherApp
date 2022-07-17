@@ -1,19 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
     <title>WeatherApp</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="background-container">
       <div class="weather-container">
-        <div id="location"></div>
-        <div id="weather-data"></div>
-        <hr>
-        <div id="time-weather-prediction"></div>
+        <div id="location">
+          <div class="city-sutuation">
+            <p id="city">Тюмень</p>
+            <p id="time">Сейчас 12:07. Вчера в это время +24°</p>
+          </div>
+          <button id="location-btn">Find me</button>
+        </div>
+        <div class="weather-data">
+          <div class="main-states">
+            <div id="temperature">+22°</div>
+            <div class="feeling-state-block">
+              <div id="state">Пасмурно</div>
+              <div id="feels-like">Ощущается как +20°</div>
+            </div>
+          </div>
+          <div class="other-states">
+            <div id="wind">20 м/с, Ю</div>
+            <div id="humidity">74%</div>
+            <div id="pressure">752 мм рт.ст</div>
+          </div>
+        </div>
+        <hr />
+        <div id="time-weather-prediction">
+          <div class="forecast-element">
+            <div id="time">12:00</div>
+            <div id="state">Пасмурно</div>
+            <div id="time-temperature">22</div>
+          </div>
+          <div class="forecast-element">
+            <div id="time">12:00</div>
+            <div id="state">Пасмурно</div>
+            <div id="time-temperature">22</div>
+          </div>
+          <div class="forecast-element">
+            <div id="time">12:00</div>
+            <div id="state">Пасмурно</div>
+            <div id="time-temperature">22</div>
+          </div>
+          <div class="forecast-element">
+            <div id="time">12:00</div>
+            <div id="state">Пасмурно</div>
+            <div id="time-temperature">22</div>
+          </div>
+        </div>
       </div>
     </div>
-</body>
+  </body>
 </html>

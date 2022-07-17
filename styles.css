@@ -1,0 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300&family=PT+Sans+Narrow&family=Titillium+Web&display=swap");
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "PT Sans Narrow", sans-serif;
+}
+
+.weather-container {
+  margin: 1rem auto;
+  text-align: center;
+  width: 60vw;
+  height: 60vh;
+  border: solid black;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#location {
+  display: flex;
+  justify-content: space-around;
+}
+
+#city {
+  font-size: 2rem;
+}
+
+.weather-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-states {
+  display: flex;
+  justify-content: start;
+  margin: 0 2rem;
+}
+
+#temperature {
+  font-size: 2rem;
+}
+
+.feeling-state-block {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+
+.other-states {
+  display: flex;
+  justify-content: start;
+  margin: 1rem auto;
+}
+
+#wind,
+#humidity,
+#pressure {
+  padding: 1rem 3rem 0;
+}
+
+#time-weather-prediction {
+  display: flex;
+  justify-content: space-evenly;
+}
