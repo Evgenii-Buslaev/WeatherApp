@@ -9,6 +9,7 @@
     <title>WeatherApp</title>
   </head>
   <body>
+    <div class="upper-container"></div>
     <div class="background-container">
       <div class="weather-container">
         <div id="location">
@@ -16,7 +17,9 @@
             <p id="city">Тюмень</p>
             <p id="time">Сейчас 12:07. Вчера в это время +24°</p>
           </div>
-          <button id="location-btn">Find me</button>
+          <div id="location-btn">
+            <img src="Icons/location.png" alt="arrow image" />
+          </div>
         </div>
         <div class="weather-data">
           <div class="main-states">
@@ -27,32 +30,48 @@
             </div>
           </div>
           <div class="other-states">
-            <div id="wind">20 м/с, Ю</div>
-            <div id="humidity">74%</div>
-            <div id="pressure">752 мм рт.ст</div>
+            <div id="wind">
+              <img src="Icons/marks/wind.png" alt="wind image" />
+              20 м/с, Ю
+            </div>
+            <div id="humidity">
+              <img src="Icons/marks/humidity.png" alt="humidity image" />74%
+            </div>
+            <div id="pressure">
+              <img src="Icons/marks/pressure.png" alt="pressure image" />752 мм
+              рт.ст
+            </div>
           </div>
         </div>
         <hr />
         <div id="time-weather-prediction">
           <div class="forecast-element">
             <div id="time">12:00</div>
-            <div id="state">Пасмурно</div>
-            <div id="time-temperature">22</div>
+            <div id="state">
+              <img src="Icons/precipitation/cloudy.png" alt="cloudy_day" />
+            </div>
+            <div id="time-temperature">+22</div>
           </div>
           <div class="forecast-element">
-            <div id="time">12:00</div>
-            <div id="state">Пасмурно</div>
-            <div id="time-temperature">22</div>
+            <div id="time">13:00</div>
+            <div id="state">
+              <img src="Icons/precipitation/cloudy_day.png" alt="cloudy_day" />
+            </div>
+            <div id="time-temperature">+22°</div>
           </div>
           <div class="forecast-element">
-            <div id="time">12:00</div>
-            <div id="state">Пасмурно</div>
-            <div id="time-temperature">22</div>
+            <div id="time">14:00</div>
+            <div id="state">
+              <img src="Icons/precipitation/cloudy_day.png" alt="cloudy_day" />
+            </div>
+            <div id="time-temperature">+22°</div>
           </div>
           <div class="forecast-element">
-            <div id="time">12:00</div>
-            <div id="state">Пасмурно</div>
-            <div id="time-temperature">22</div>
+            <div id="time">15:00</div>
+            <div id="state">
+              <img src="Icons/precipitation/cloudy_day.png" alt="cloudy_day" />
+            </div>
+            <div id="time-temperature">+22°</div>
           </div>
         </div>
       </div>

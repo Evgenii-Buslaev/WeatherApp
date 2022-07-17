@@ -6,6 +6,23 @@
   font-family: "PT Sans Narrow", sans-serif;
 }
 
+/* .upper-container {
+  width: 100vw;
+  height: 20vh;
+
+  background-image: url(Images/background_cloudy.jpeg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} */
+
+/* html {
+  background-color: rgb(141, 128, 128);
+} */
 .weather-container {
   margin: 1rem auto;
   text-align: center;
@@ -21,6 +38,33 @@
 #location {
   display: flex;
   justify-content: space-around;
+}
+
+#location-btn {
+  transition-property: all;
+  transition-duration: 0.5s;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(164, 177, 176);
+  border-radius: 50%;
+}
+
+#location-btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+#location-btn img:hover {
+  opacity: 0.8;
+}
+
+#location-btn img {
+  transition-property: all;
+  transition-duration: 0.5s;
+  display: block;
+  margin: 1rem auto 0;
+  width: 30px;
+  height: 30px;
 }
 
 #city {
@@ -54,13 +98,25 @@
   margin: 1rem auto;
 }
 
+.other-states img {
+  width: 30px;
+  height: 30px;
+}
+
 #wind,
 #humidity,
 #pressure {
+  display: flex;
+  align-items: center;
   padding: 1rem 3rem 0;
 }
 
 #time-weather-prediction {
   display: flex;
   justify-content: space-evenly;
+}
+
+.forecast-element img {
+  width: 40px;
+  height: 40px;
 }
