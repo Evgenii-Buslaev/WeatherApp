@@ -26,18 +26,17 @@
 .weather-container {
   margin: 1rem auto;
   text-align: center;
-  width: 60vw;
-  height: 60vh;
+  width: 80vw;
+  height: auto;
   border: solid black;
   border-radius: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  display: block;
 }
 
 #location {
   display: flex;
   justify-content: space-around;
+  margin-top: 1rem;
 }
 
 #location-btn {
@@ -78,8 +77,8 @@
 
 .main-states {
   display: flex;
-  justify-content: start;
-  margin: 0 2rem;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 #temperature {
@@ -90,6 +89,15 @@
   display: flex;
   flex-direction: column;
   margin-left: 2rem;
+}
+
+#state {
+  display: flex;
+  align-items: center;
+}
+#state img {
+  width: 40px;
+  height: 40px;
 }
 
 .other-states {
@@ -119,4 +127,55 @@
 .forecast-element img {
   width: 40px;
   height: 40px;
+}
+
+@media (max-width: 900px) {
+  #wind,
+  #humidity,
+  #pressure {
+    padding: 1rem 2rem 0;
+  }
+}
+
+@media (max-width: 730px) {
+  #wind,
+  #humidity,
+  #pressure {
+    padding: 1rem 1rem 0;
+  }
+}
+
+@media (max-width: 570px) {
+  #wind,
+  #humidity,
+  #pressure {
+    flex-direction: column;
+  }
+  #location-btn {
+    margin-top: 1rem;
+    width: 40px;
+    height: 40px;
+  }
+  #location-btn img {
+    margin-top: 0.7rem;
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 350px) {
+  #city {
+    font-size: 1.5rem;
+    margin: 1rem auto;
+  }
+  #location-btn {
+    margin-top: 0;
+    margin: 1rem auto;
+  }
+  #location {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
