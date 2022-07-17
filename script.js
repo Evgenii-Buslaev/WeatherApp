@@ -1,6 +1,16 @@
 // getting needed DOM-elements
 let cityName = document.getElementById("city");
 let locationBtn = document.getElementById("location-btn");
+let timeString = document.getElementById('time')
+let time = timeString.innerText.match(/\d+\:\d+/)[0]
+console.log(time)
+
+let date = new Date()
+let hours = date.getHours()
+let minutes = date.getMinutes()
+
+time.innerText = `${hours}:${minutes}`
+
 
 // object for current state
 let city = {
