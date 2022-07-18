@@ -1,33 +1,57 @@
+// links
+let locationUrl =
+  "https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address";
+let token = "7b0d07bc549fc06afcf392d74f2aa6beb81a784a";
+const linkAPI = "http://api.weatherapi.com/v1/current.json";
+let keyAPI = "6861653a70004c5f944134019221707";
+
 // getting needed DOM-elements
 let cityName = document.getElementById("city");
 let locationBtn = document.getElementById("location-btn");
-let timeString = document.getElementById('time')
-let time = timeString.innerText.match(/\d+\:\d+/)[0]
-console.log(time)
+let timeString = document.getElementById("time");
+let time = timeString.innerText.match(/\d+\:\d+/)[0];
 
-let date = new Date()
-let hours = date.getHours()
-let minutes = date.getMinutes()
+// working with time
+let date = new Date();
+let hours = date.getHours();
+let minutes = date.getMinutes();
 
-time.innerText = `${hours}:${minutes}`
+if (hours.toString().length < 2) {
+  hours = "0" + hours;
+}
+if (minutes.toString().length < 2) {
+  minutes = "0" + minutes;
+}
 
+timeString.innerText = `Сейчас ${hours}:${minutes}.`;
 
 // object for current state
 let city = {
   lat: null,
   lng: null,
   city_defined: false,
-}
+  data_recieved: false,
+};
+
+// object for weather
+let store = {
+  city: "Москва",
+  condition: "Ясно",
+  temperature: 0,
+  feelsLike: 0,
+  isDay: 0,
+  wind: 0,
+  windDir: 0,
+  pressure: 0,
+  humidity: 0,
+  visability: 0,
+};
 
 // function for getting user's location
 function getLocation() {
   navigator.geolocation.getCurrentPosition(function (position) {
     city.lat = position.coords.latitude;
     city.lng = position.coords.longitude;
-    
-    let url =
-      "https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address";
-    let token = "7b0d07bc549fc06afcf392d74f2aa6beb81a784a";
     let query = { lat: city.lat, lon: city.lng };
 
     let options = {
@@ -42,16 +66,19 @@ function getLocation() {
     };
 
     // changing city name to current city (without a prefix)
-    fetch(url, options)
+    fetch(locationUrl, options)
       .then((response) => response.json())
       .then((result) => {
-        cityName.innerText = result.suggestions[0].data.city_with_type.match(/(?<=\s)\p{Alpha}+/gu)
-        city.city_defined = true
+        cityName.innerText =
+          result.suggestions[0].data.city_with_type.match(
+            /(?<=\s)\p{Alpha}+/gu
+          );
+        city.city_defined = true;
       })
       .catch((error) => {
-        console.log("error", error)
-        city.innerText = 'Москва'
-        city.city_defined = true
+        console.log("error", error);
+        city.innerText = "Москва";
+        city.city_defined = true;
       });
   });
 }
@@ -60,39 +87,75 @@ function getLocation() {
 function getAPIData() {
   let check = setInterval(() => {
     if (city.city_defined === true) {
-      
-      let key = '6861653a70004c5f944134019221707'
       // getting current weather data
-      fetch(`http://api.weatherapi.com/v1/current.json?key=${key}&q=${cityName.innerText}`)
+      fetch(`${linkAPI}?key=${keyAPI}&q=${cityName.innerText}`)
         .then((response) => response.json())
-        .then(result => console.log(result))
-        .catch((err) => console.log('error', err))
-      clearInterval(check)
-      }
-    }, 100)
+        .then((result) => {
+          const {
+            current: {
+              condition: { text },
+              temp_c: temperature,
+              feelslike_c: feelsLike,
+              humidity,
+              is_day: isDay,
+              wind_kph: wind,
+              wind_dir: windDir,
+              pressure_mb: pressure,
+              vis_km: visability,
+            },
+            location: { name },
+          } = result;
+
+          store = {
+            city: name,
+            condition: text,
+            temperature,
+            feelsLike,
+            isDay,
+            wind,
+            windDir,
+            pressure,
+            humidity,
+            visability,
+          };
+          city.data_recieved = true;
+        })
+        .catch((err) => console.log("error", err));
+      clearInterval(check);
+    }
+  }, 100);
 }
 
-let question = confirm('Определить Ваш город автоматически?')
+let question = confirm("Определить Ваш город автоматически?");
 
 if (question) {
-  getLocation()
+  getLocation();
 } else {
-  cityName.innerText = 'Москва'
-  city.city_defined = true
+  cityName.innerText = "Москва";
+  city.city_defined = true;
 }
 
-// events
-window.addEventListener('load', getAPIData)
+function renderProperties() {
+  let checkData = setInterval(() => {
+    if (city.data_recieved === true) {
+      console.log(store);
+      clearInterval(checkData);
+    }
+  }, 100);
+}
 
+renderProperties();
+
+// events
+window.addEventListener("load", getAPIData);
 
 locationBtn.addEventListener("click", () => {
- city.city_defined = false
- getLocation()
- let check = setInterval(() => {
-  if (city.city_defined === true) {
-    getAPIData()
-    clearInterval(check)
-  }
- }, 100)
+  city.city_defined = false;
+  getLocation();
+  let check = setInterval(() => {
+    if (city.city_defined === true) {
+      getAPIData();
+      clearInterval(check);
+    }
+  }, 100);
 });
-
