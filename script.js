@@ -26,7 +26,7 @@ if (minutes.toString().length < 2) {
 timeString.innerText = `Сейчас ${hours}:${minutes}.`;
 
 // object for current state
-let city = {
+let state = {
   lat: null,
   lng: null,
   city_defined: false,
@@ -47,12 +47,74 @@ let store = {
   visability: 0,
 };
 
+// function for displaying recieved data
+function renderProperties() {
+  let checkData = setInterval(() => {
+    if (city.data_recieved === true) {
+      console.log(store);
+      clearInterval(checkData);
+
+      // temperature
+      if ([...store.temperature.toString()][0] !== "-") {
+        document.getElementById(
+          "temperature"
+        ).innerText = `+${store.temperature}°`;
+        document.getElementById(
+          "feels-like"
+        ).innerText = `Ощущается как +${store.feelsLike}°`;
+      } else {
+        document.getElementById(
+          "temperature"
+        ).innerText = `-${store.temperature}°`;
+        document.getElementById(
+          "feels-like"
+        ).innerText = `Ощущается как -${store.feelsLike}°`;
+      }
+
+      // wind
+      document.getElementById("wind").innerHTML += `
+      ${store.wind} км/ч, ${store.windDir}`;
+
+      // humidity
+      document.getElementById("humidity").innerHTML += `${store.humidity}%`;
+
+      // pressure
+      document.getElementById("pressure").innerHTML += `${parseInt(
+        store.pressure * 0.750063755419211
+      )} мм рт. ст.`;
+
+      // condition
+      if (store.condition === "Sunny") {
+        document.getElementById("state").innerHTML += "Ясно";
+        document
+          .getElementById("weather-img")
+          .setAttribute("src", "Icons/precipitation/sunny.png");
+      }
+      if (store.condition === "Cloudy") {
+        document.getElementById("state").innerHTML += "Облачно";
+        document
+          .getElementById("weather-img")
+          .setAttribute("src", "Icons/precipitation/cloudy.png");
+      }
+      if (store.condition === "Partly_cloudy") {
+        document.getElementById("state").innerHTML += "Облачно с прояснениями";
+        document
+          .getElementById("weather-img")
+          .setAttribute("src", "Icons/precipitation/cloudy_with_sun.png");
+      }
+      if (store.condition === "Fog") {
+        document.getElementById("state").innerHTML += "Туман";
+      }
+    }
+  }, 100);
+}
+
 // function for getting user's location
 function getLocation() {
   navigator.geolocation.getCurrentPosition(function (position) {
-    city.lat = position.coords.latitude;
-    city.lng = position.coords.longitude;
-    let query = { lat: city.lat, lon: city.lng };
+    state.lat = position.coords.latitude;
+    state.lng = position.coords.longitude;
+    let query = { lat: state.lat, lon: state.lng };
 
     let options = {
       method: "POST",
@@ -73,12 +135,12 @@ function getLocation() {
           result.suggestions[0].data.city_with_type.match(
             /(?<=\s)\p{Alpha}+/gu
           );
-        city.city_defined = true;
+        state.city_defined = true;
       })
       .catch((error) => {
         console.log("error", error);
-        city.innerText = "Москва";
-        city.city_defined = true;
+        state.innerText = "Москва";
+        state.city_defined = true;
       });
   });
 }
@@ -86,7 +148,7 @@ function getLocation() {
 // function for getting current weather
 function getAPIData() {
   let check = setInterval(() => {
-    if (city.city_defined === true) {
+    if (state.city_defined === true) {
       // getting current weather data
       fetch(`${linkAPI}?key=${keyAPI}&q=${cityName.innerText}`)
         .then((response) => response.json())
@@ -119,6 +181,7 @@ function getAPIData() {
             visability,
           };
           city.data_recieved = true;
+          renderProperties();
         })
         .catch((err) => console.log("error", err));
       clearInterval(check);
@@ -132,28 +195,17 @@ if (question) {
   getLocation();
 } else {
   cityName.innerText = "Москва";
-  city.city_defined = true;
+  state.city_defined = true;
 }
-
-function renderProperties() {
-  let checkData = setInterval(() => {
-    if (city.data_recieved === true) {
-      console.log(store);
-      clearInterval(checkData);
-    }
-  }, 100);
-}
-
-renderProperties();
 
 // events
 window.addEventListener("load", getAPIData);
 
 locationBtn.addEventListener("click", () => {
-  city.city_defined = false;
+  state.city_defined = false;
   getLocation();
   let check = setInterval(() => {
-    if (city.city_defined === true) {
+    if (state.city_defined === true) {
       getAPIData();
       clearInterval(check);
     }
