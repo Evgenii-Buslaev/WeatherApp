@@ -1,9 +1,9 @@
 // links
-let locationUrl =
+const locationUrl =
   "https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address";
-let token = "7b0d07bc549fc06afcf392d74f2aa6beb81a784a";
+const token = "7b0d07bc549fc06afcf392d74f2aa6beb81a784a";
 const linkAPI = "http://api.weatherapi.com/v1/current.json";
-let keyAPI = "6861653a70004c5f944134019221707";
+const keyAPI = "6861653a70004c5f944134019221707";
 
 // getting needed DOM-elements
 let cityName = document.getElementById("city");
@@ -35,8 +35,8 @@ let state = {
 
 // object for weather
 let store = {
-  city: "Москва",
-  condition: "Ясно",
+  city: null,
+  condition: null,
   temperature: 0,
   feelsLike: 0,
   isDay: 0,
@@ -73,7 +73,7 @@ function renderProperties() {
 
       // wind
       document.getElementById("wind").innerHTML += `
-      ${store.wind} км/ч, ${store.windDir}`;
+      ${(store.wind / 3.6).toFixed(2)} м/c, ${store.windDir}`;
 
       // humidity
       document.getElementById("humidity").innerHTML += `${store.humidity}%`;
@@ -84,26 +84,34 @@ function renderProperties() {
       )} мм рт. ст.`;
 
       // condition
-      if (store.condition === "Sunny") {
-        document.getElementById("state").innerHTML += "Ясно";
+
+      document.getElementById("state").innerHTML += `${store.condition.text}`;
+      document
+        .getElementById("weather-img")
+        .setAttribute("src", store.condition.icon);
+
+      // custom images
+      if (store.condition.text === "Солнечно") {
         document
           .getElementById("weather-img")
           .setAttribute("src", "Icons/precipitation/sunny.png");
       }
-      if (store.condition === "Cloudy") {
-        document.getElementById("state").innerHTML += "Облачно";
+      if (store.condition.text === "Облачно") {
         document
           .getElementById("weather-img")
           .setAttribute("src", "Icons/precipitation/cloudy.png");
       }
-      if (store.condition === "Partly_cloudy") {
+      if (store.condition.text === "Переменная облачность") {
         document.getElementById("state").innerHTML += "Облачно с прояснениями";
         document
           .getElementById("weather-img")
           .setAttribute("src", "Icons/precipitation/cloudy_with_sun.png");
       }
-      if (store.condition === "Fog") {
-        document.getElementById("state").innerHTML += "Туман";
+      if (store.condition.text === "Дождь") {
+        document.getElementById("state").innerHTML += "Дождь";
+        document
+          .getElementById("weather-img")
+          .setAttribute("src", "Icons/precipitation/rainy.png");
       }
     }
   }, 100);
@@ -150,12 +158,12 @@ function getAPIData() {
   let check = setInterval(() => {
     if (state.city_defined === true) {
       // getting current weather data
-      fetch(`${linkAPI}?key=${keyAPI}&q=${cityName.innerText}`)
+      fetch(`${linkAPI}?key=${keyAPI}&q=${cityName.innerText}&lang=ru`)
         .then((response) => response.json())
         .then((result) => {
           const {
             current: {
-              condition: { text },
+              condition: { text, icon },
               temp_c: temperature,
               feelslike_c: feelsLike,
               humidity,
@@ -170,7 +178,7 @@ function getAPIData() {
 
           store = {
             city: name,
-            condition: text,
+            condition: { text, icon },
             temperature,
             feelsLike,
             isDay,
