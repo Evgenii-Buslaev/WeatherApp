@@ -219,3 +219,9 @@ locationBtn.addEventListener("click", () => {
     }
   }, 100);
 });
+
+const togglePopupClass = () => {
+  popup.classList.toggle("active");
+};
+
+cityName.addEventListener("click", togglePopupClass);
