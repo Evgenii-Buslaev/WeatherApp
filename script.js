@@ -12,6 +12,7 @@ let timeString = document.getElementById("time");
 let time = timeString.innerText.match(/\d+\:\d+/)[0];
 let form = document.querySelector(".form");
 let textInput = document.querySelector(".form-input");
+let closePopup = document.getElementById("close");
 
 // object for current state
 let state = {
@@ -188,7 +189,12 @@ function getAPIData() {
           city.data_recieved = true;
           renderProperties();
         })
-        .catch((err) => console.log("error", err));
+        .catch((err) => {
+          console.log("error", err);
+          alert("Такой город не найден");
+          cityName.innerHTML = "Москва";
+          getAPIData();
+        });
       clearInterval(check);
     }
   }, 100);
@@ -239,3 +245,4 @@ const handleSubmit = (e) => {
 
 form.addEventListener("submit", handleSubmit);
 textInput.addEventListener("input", handleInput);
+closePopup.addEventListener("click", togglePopupClass);
