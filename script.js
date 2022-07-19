@@ -12,19 +12,6 @@ let timeString = document.getElementById("time");
 let time = timeString.innerText.match(/\d+\:\d+/)[0];
 let form = document.querySelector(".form");
 let textInput = document.querySelector(".form-input");
-// working with time
-let date = new Date();
-let hours = date.getHours();
-let minutes = date.getMinutes();
-
-if (hours.toString().length < 2) {
-  hours = "0" + hours;
-}
-if (minutes.toString().length < 2) {
-  minutes = "0" + minutes;
-}
-
-timeString.innerText = `Сейчас ${hours}:${minutes}.`;
 
 // object for current state
 let state = {
@@ -54,6 +41,9 @@ function renderProperties() {
     if (city.data_recieved === true) {
       console.log(store);
       clearInterval(checkData);
+
+      // time
+      timeString.innerText = `Местное время: ${store.time.split(" ")[1]}`;
 
       // temperature
       if ([...store.temperature.toString()][0] !== "-") {
@@ -177,11 +167,14 @@ function getAPIData() {
               pressure_mb: pressure,
               vis_km: visability,
             },
-            location: { name },
+            location: { name, localtime },
           } = result;
+
+          console.log(result);
 
           store = {
             city: name,
+            time: localtime,
             condition: { text, icon },
             temperature,
             feelsLike,
