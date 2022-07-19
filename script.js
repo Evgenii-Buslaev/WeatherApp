@@ -10,6 +10,8 @@ let cityName = document.getElementById("city");
 let locationBtn = document.getElementById("location-btn");
 let timeString = document.getElementById("time");
 let time = timeString.innerText.match(/\d+\:\d+/)[0];
+let form = document.querySelector(".form");
+let textInput = document.querySelector(".form-input");
 
 // working with time
 let date = new Date();
@@ -102,13 +104,12 @@ function renderProperties() {
           .setAttribute("src", "Icons/precipitation/cloudy.png");
       }
       if (store.condition.text === "Переменная облачность") {
-        document.getElementById("state").innerHTML += "Облачно с прояснениями";
         document
           .getElementById("weather-img")
           .setAttribute("src", "Icons/precipitation/cloudy_with_sun.png");
       }
       if (store.condition.text === "Дождь") {
-        document.getElementById("state").innerHTML += "Дождь";
+        document.getElementById("state").innerHTML = "Дождь";
         document
           .getElementById("weather-img")
           .setAttribute("src", "Icons/precipitation/rainy.png");
@@ -220,8 +221,26 @@ locationBtn.addEventListener("click", () => {
   }, 100);
 });
 
+// function and events for popup
 const togglePopupClass = () => {
   popup.classList.toggle("active");
 };
 
 cityName.addEventListener("click", togglePopupClass);
+
+const handleInput = (e) => {
+  cityName.innerText = e.target.value;
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const value = cityName;
+
+  if (!value) return null;
+  getAPIData();
+  renderProperties();
+  togglePopupClass();
+};
+
+form.addEventListener("submit", handleSubmit);
+textInput.addEventListener("input", handleInput);
