@@ -12,7 +12,6 @@ let timeString = document.getElementById("time");
 let time = timeString.innerText.match(/\d+\:\d+/)[0];
 let form = document.querySelector(".form");
 let textInput = document.querySelector(".form-input");
-
 // working with time
 let date = new Date();
 let hours = date.getHours();
@@ -74,45 +73,49 @@ function renderProperties() {
       }
 
       // wind
-      document.getElementById("wind").innerHTML += `
+      document.getElementById(
+        "wind"
+      ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
       ${(store.wind / 3.6).toFixed(2)} м/c, ${store.windDir}`;
 
       // humidity
-      document.getElementById("humidity").innerHTML += `${store.humidity}%`;
+      document.getElementById(
+        "humidity"
+      ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
+      ${store.humidity}%`;
 
       // pressure
-      document.getElementById("pressure").innerHTML += `${parseInt(
-        store.pressure * 0.750063755419211
-      )} мм рт. ст.`;
+      document.getElementById(
+        "pressure"
+      ).innerHTML = `<img src="Icons/marks/pressure.png" alt="pressure image" />
+      ${parseInt(store.pressure * 0.750063755419211)} мм рт. ст.`;
 
       // condition
-
-      document.getElementById("state").innerHTML += `${store.condition.text}`;
-      document
-        .getElementById("weather-img")
-        .setAttribute("src", store.condition.icon);
+      document.getElementById(
+        "state"
+      ).innerHTML = `<img src=${store.condition.icon} alt='condition_day' />${store.condition.text}`;
 
       // custom images
       if (store.condition.text === "Солнечно") {
-        document
-          .getElementById("weather-img")
-          .setAttribute("src", "Icons/precipitation/sunny.png");
+        document.getElementById(
+          "state"
+        ).innerHTML = `<img src="Icons/precipitation/sunny.png" alt='condition_day' />${store.condition.text}`;
       }
       if (store.condition.text === "Облачно") {
-        document
-          .getElementById("weather-img")
-          .setAttribute("src", "Icons/precipitation/cloudy.png");
+        document.getElementById(
+          "state"
+        ).innerHTML = `<img src="Icons/precipitation/cloudy.png" alt='condition_day' />${store.condition.text}`;
       }
       if (store.condition.text === "Переменная облачность") {
-        document
-          .getElementById("weather-img")
-          .setAttribute("src", "Icons/precipitation/cloudy_with_sun.png");
+        document.getElementById(
+          "state"
+        ).innerHTML = `<img src="Icons/precipitation/cloudy_with_sun.png" alt='condition_day' />${store.condition.text}`;
       }
       if (store.condition.text === "Дождь") {
         document.getElementById("state").innerHTML = "Дождь";
-        document
-          .getElementById("weather-img")
-          .setAttribute("src", "Icons/precipitation/rainy.png");
+        document.getElementById(
+          "state"
+        ).innerHTML = `<img src="Icons/precipitation/rainy.png" alt='condition_day' />${store.condition.text}`;
       }
     }
   }, 100);
@@ -238,7 +241,6 @@ const handleSubmit = (e) => {
 
   if (!value) return null;
   getAPIData();
-  renderProperties();
   togglePopupClass();
 };
 
