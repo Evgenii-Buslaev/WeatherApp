@@ -130,8 +130,18 @@
 }
 
 #time-weather-prediction {
+  margin: auto;
+  width: 70vw;
   display: flex;
   justify-content: space-evenly;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#time-weather-prediction::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .forecast-element img {
