@@ -178,7 +178,7 @@ hr {
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  filter: drop-shadow(0 0 0.75rem crimson);
+  filter: drop-shadow(0 0 0.75rem rgb(38, 138, 196));
 }
 
 #time-weather-prediction::-webkit-scrollbar {

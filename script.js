@@ -2,7 +2,7 @@
 const locationUrl =
   "https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address";
 const token = "7b0d07bc549fc06afcf392d74f2aa6beb81a784a";
-const linkAPI = "http://api.weatherapi.com/v1/forecast.json";
+const linkAPI = "https://api.weatherapi.com/v1/forecast.json";
 const keyAPI = "6861653a70004c5f944134019221707";
 
 // getting needed DOM-elements
@@ -16,7 +16,7 @@ let closePopup = document.getElementById("close");
 let forecastBlock = document.getElementById("time-weather-prediction");
 let scrollLeft = document.getElementById("scroll-left-btn");
 let scrollRight = document.getElementById("scroll-right-btn");
-let forecastBar = document.querySelector("weather-forecast-bar");
+let forecastBar = document.querySelector(".weather-forecast-bar");
 
 // object for current state
 let state = {
@@ -220,11 +220,24 @@ function renderProperties() {
         forecastBlock.innerHTML += `<div class="forecast-element">
                                         <div id="time">${i}:00</div>
                                         <div id="state">
-                                        <img src=${store.forecast[i].condition.icon} alt='condition_day' />
+                                        <img id='img' src=${store.forecast[i].condition.icon} alt='condition_day' />
                                         </div>
                                         <div id="time-temperature">+${store.forecast[i].temp_c}°</div>
                                     </div>`;
       }
+
+      // forecast options
+
+      forecastBar.addEventListener("click", (event) => {
+        if (
+          event.target.getAttribute("id") === "time" ||
+          event.target.getAttribute("id") === "time-temperature" ||
+          event.target.getAttribute("id") === "img"
+        ) {
+          console.log(event.target);
+          console.log(event.currentTarget);
+        }
+      });
     }
   }, 100);
 }
@@ -260,10 +273,6 @@ scrollRight.addEventListener("click", () => {
 scrollLeft.addEventListener("click", () => {
   forecastBlock.firstChild.scrollIntoView({ behavior: "smooth" });
 });
-
-/* forecastBar.addEventListener('click', (event) => {
-  if (event.target.classList === 'forecast-element')
-})  */
 
 // function and events for popup
 const togglePopupClass = () => {
