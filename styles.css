@@ -127,6 +127,8 @@ hr {
 }
 
 .weather-data {
+  transition-property: all;
+  transition-duration: 0.5s;
   display: flex;
   flex-direction: column;
 }

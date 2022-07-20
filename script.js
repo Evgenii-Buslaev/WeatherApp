@@ -16,6 +16,7 @@ let closePopup = document.getElementById("close");
 let forecastBlock = document.getElementById("time-weather-prediction");
 let scrollLeft = document.getElementById("scroll-left-btn");
 let scrollRight = document.getElementById("scroll-right-btn");
+let weatherData = document.querySelector(".weather-data");
 let forecastBar = document.querySelector(".weather-forecast-bar");
 
 // object for current state
@@ -229,60 +230,68 @@ function renderProperties() {
       // forecast options
 
       forecastBar.addEventListener("click", (event) => {
-        if (
-          event.target.getAttribute("id") === "time" ||
-          event.target.getAttribute("id") === "time-temperature" ||
-          event.target.getAttribute("id") === "img"
-        ) {
-          let element = event.target.parentNode;
-          let elementNumber = element.getAttribute("id");
+        weatherData.style.opacity = 0;
+        setTimeout(() => {
+          if (
+            event.target.getAttribute("id") === "time" ||
+            event.target.getAttribute("id") === "time-temperature" ||
+            event.target.getAttribute("id") === "img"
+          ) {
+            let element = event.target.parentNode;
+            let elementNumber = element.getAttribute("id");
 
-          // time
-          timeString.innerText = `Прогноз на ${elementNumber}:00`;
+            // time
+            timeString.innerText = `Прогноз на ${elementNumber}:00`;
 
-          // temperature
-          if ([...store.forecast[elementNumber].temp_c.toString()][0] !== "-") {
-            document.getElementById(
-              "temperature"
-            ).innerText = `+${store.forecast[elementNumber].temp_c}°`;
-            document.getElementById(
-              "feels-like"
-            ).innerText = `Ощущается как +${store.forecast[elementNumber].feelslike_c}°`;
-          } else {
-            document.getElementById(
-              "temperature"
-            ).innerText = `-${store.forecast[elementNumber].temp_c}°`;
-            document.getElementById(
-              "feels-like"
-            ).innerText = `Ощущается как -${store.forecast[elementNumber].feelslike_c}°`;
-          }
+            // temperature
+            if (
+              [...store.forecast[elementNumber].temp_c.toString()][0] !== "-"
+            ) {
+              document.getElementById(
+                "temperature"
+              ).innerText = `+${store.forecast[elementNumber].temp_c}°`;
+              document.getElementById(
+                "feels-like"
+              ).innerText = `Ощущается как +${store.forecast[elementNumber].feelslike_c}°`;
+            } else {
+              document.getElementById(
+                "temperature"
+              ).innerText = `-${store.forecast[elementNumber].temp_c}°`;
+              document.getElementById(
+                "feels-like"
+              ).innerText = `Ощущается как -${store.forecast[elementNumber].feelslike_c}°`;
+            }
 
-          // wind
-          document.getElementById(
-            "wind"
-          ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
+            // wind
+            document.getElementById(
+              "wind"
+            ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
           ${(store.forecast[elementNumber].wind_kph / 3.6).toFixed(2)} м/c, ${
-            store.forecast[elementNumber].wind_dir
-          }`;
+              store.forecast[elementNumber].wind_dir
+            }`;
 
-          // humidity
-          document.getElementById(
-            "humidity"
-          ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
+            // humidity
+            document.getElementById(
+              "humidity"
+            ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
           ${store.forecast[elementNumber].humidity}%`;
 
-          // pressure
-          document.getElementById(
-            "pressure"
-          ).innerHTML = `<img src="Icons/marks/pressure.png" alt="pressure image" />
+            // pressure
+            document.getElementById(
+              "pressure"
+            ).innerHTML = `<img src="Icons/marks/pressure.png" alt="pressure image" />
           ${parseInt(
             store.forecast[elementNumber].pressure_mb * 0.750063755419211
           )} мм рт. ст.`;
-          // condition
-          document.getElementById(
-            "state"
-          ).innerHTML = `<img src=${store.forecast[elementNumber].condition.icon} alt='condition_day' />${store.forecast[elementNumber].condition.text}`;
-        }
+            // condition
+            document.getElementById(
+              "state"
+            ).innerHTML = `<img src=${store.forecast[elementNumber].condition.icon} alt='condition_day' />${store.forecast[elementNumber].condition.text}`;
+          }
+        }, 500);
+        setTimeout(() => {
+          weatherData.style.opacity = 1;
+        }, 1000);
       });
     }
   }, 100);
