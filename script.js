@@ -130,23 +130,27 @@ function getLocation() {
       body: JSON.stringify(query),
     };
 
+  (async () => {
     // changing city name to current city (without a prefix)
-    fetch(locationUrl, options)
-      .then((response) => response.json())
-      .then((result) => {
-        cityName.innerText =
-          result.suggestions[0].data.city_with_type.match(
-            /(?<=\s)\p{Alpha}+/gu
-          );
-        state.city_defined = true;
-      })
-      .catch((error) => {
-        console.log("error", error);
-        state.innerText = "Москва";
-        state.city_defined = true;
-      });
+    try {
+    let promise = await fetch(locationUrl, options)
+    let response = await promise.json()
+    let result = await response
+    console.log(result);
+    cityName.innerText =  result.suggestions[0].data.city_with_type.match(
+      /(?<=\s)\p{Alpha}+/gu
+    );
+    state.city_defined = true;
+    } catch {
+      console.log("error", error);
+      cityName.innerText = 'Москва'
+      state.innerText = "Москва";
+      state.city_defined = true;
+    }
+    })()
   });
 }
+
 
 // function for getting current weather
 function getAPIData() {
