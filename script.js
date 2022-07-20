@@ -190,7 +190,7 @@ function renderProperties() {
       ).innerHTML = `<img src=${store.condition.icon} alt='condition_day' />${store.condition.text}`;
 
       // custom images
-      if (store.condition.text === "Солнечно") {
+      /* if (store.condition.text === "Солнечно") {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/sunny.png" alt='condition_day' />${store.condition.text}`;
@@ -210,7 +210,7 @@ function renderProperties() {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/rainy.png" alt='condition_day' />${store.condition.text}`;
-      }
+      } */
 
       // render forecast
       forecastBlock.innerHTML = "";
@@ -228,7 +228,7 @@ function renderProperties() {
 
       // forecast options
 
-      forecastBar.addEventListener("click", (event) => {
+      /*   forecastBar.addEventListener("click", (event) => {
         if (
           event.target.getAttribute("id") === "time" ||
           event.target.getAttribute("id") === "time-temperature" ||
@@ -237,7 +237,7 @@ function renderProperties() {
           console.log(event.target);
           console.log(event.currentTarget);
         }
-      });
+      }); */
     }
   }, 100);
 }

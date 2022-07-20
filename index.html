@@ -4,6 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="Icons/Favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="Icons/Favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="Icons/Favicon/apple-touch-icon.png"
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
     <title>WeatherApp</title>
@@ -43,49 +60,68 @@
         </div>
         <hr />
         <div class="weather-forecast-bar">
-        <div id="scroll-left-btn">
-          <img src="Icons/arrow.png" alt="arrow image" />
-       </div>
-        <div id="time-weather-prediction">
-          <div class="forecast-element">
-            <div id="time">00:00</div>
-            <div id="state">
-            <img id='img' src='Icons/precipitation/sunny.png' alt='condition_day' />
+          <div id="scroll-left-btn">
+            <img src="Icons/arrow.png" alt="arrow image" />
+          </div>
+          <div id="time-weather-prediction">
+            <div class="forecast-element">
+              <div id="time">00:00</div>
+              <div id="state">
+                <img
+                  id="img"
+                  src="Icons/precipitation/sunny.png"
+                  alt="condition_day"
+                />
+              </div>
+              <div id="time-temperature">+22°</div>
             </div>
-            <div id="time-temperature">+22°</div>
+          </div>
+          <div id="scroll-right-btn">
+            <img src="Icons/arrow.png" alt="arrow image" />
+          </div>
         </div>
-        </div>
-        <div id="scroll-right-btn">
-          <img src="Icons/arrow.png" alt="arrow image" />
-       </div>
       </div>
-      </div>
-    </div>
-    <div class="popup" id="popup">
-      <form class="form" id="form">
-        <div class="form-group">
-          <input
-            type="text"
-            value=""
-            name="city"
-            class="form-input"
-            id="text-input"
-            placeholder="Москва"
-            required
-          />
-          <input
-            type="submit"
-            class="form-submit"
-            id="submit-button"
-            value="OK"
-          />
+      <!--  <div class="wind-block">
+        <div class="wind-container">
+          <div>Ветер</div>
+          <div class="animated-wind">
+            <div id="base"></div>
+            <div id="center"></div>
+            <div class="blade" id="first"></div>
+            <div class="blade" id="second"></div>
+            <div class="blade" id="third"></div>
+          </div>
         </div>
-      </form>
+        <div class="wind-text">
+          <div>Направление ветра</div>
+          <div>Скорость ветра</div>
+        </div>
+      </div> -->
+      <div class="popup" id="popup">
+        <form class="form" id="form">
+          <div class="form-group">
+            <input
+              type="text"
+              value=""
+              name="city"
+              class="form-input"
+              id="text-input"
+              placeholder="Москва"
+              required
+            />
+            <input
+              type="submit"
+              class="form-submit"
+              id="submit-button"
+              value="OK"
+            />
+          </div>
+        </form>
 
-      <div class="popup-close" id="close">
-        <span></span>
+        <div class="popup-close" id="close">
+          <span></span>
+        </div>
       </div>
     </div>
-  </div>
   </body>
 </html>

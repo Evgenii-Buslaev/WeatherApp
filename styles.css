@@ -30,13 +30,26 @@ hr {
 }
 
 .weather-container {
-  margin: 1rem auto;
+  margin: 1rem 10%;
   text-align: center;
-  width: 80vw;
+  width: auto;
   height: auto;
   border: solid black;
   border-radius: 2rem;
   display: block;
+  transition-property: all;
+  transition-duration: 1s;
+}
+
+.wind-block {
+  margin: 1rem 10%;
+  text-align: center;
+  width: auto;
+  height: auto;
+  border: solid black;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: space-evenly;
   transition-property: all;
   transition-duration: 1s;
 }
