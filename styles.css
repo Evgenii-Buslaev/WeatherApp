@@ -82,20 +82,12 @@ hr {
 
 #scroll-left-btn,
 #scroll-right-btn {
+  margin: auto;
+  transition-property: all;
+  transition-duration: 0.5s;
   width: 30px;
   height: 30px;
-  background-color: rgb(164, 177, 176);
   border-radius: 50%;
-}
-
-#scroll-left-btn {
-  position: absolute;
-  left: 5%;
-}
-
-#scroll-right-btn {
-  position: absolute;
-  right: 5%;
 }
 
 #scroll-left-btn img,
@@ -192,6 +184,17 @@ hr {
 #time-weather-prediction::-webkit-scrollbar {
   width: 0;
   height: 0;
+}
+
+.forecast-element {
+  transition-property: all;
+  transition-duration: 0.5s;
+}
+
+.forecast-element:hover {
+  opacity: 0.6;
+  cursor: pointer;
+  background-color: rgb(164, 177, 176);
 }
 
 .forecast-element img {

@@ -16,6 +16,7 @@ let closePopup = document.getElementById("close");
 let forecastBlock = document.getElementById("time-weather-prediction");
 let scrollLeft = document.getElementById("scroll-left-btn");
 let scrollRight = document.getElementById("scroll-right-btn");
+let forecastBar = document.querySelector("weather-forecast-bar");
 
 // object for current state
 let state = {
@@ -259,6 +260,10 @@ scrollRight.addEventListener("click", () => {
 scrollLeft.addEventListener("click", () => {
   forecastBlock.firstChild.scrollIntoView({ behavior: "smooth" });
 });
+
+/* forecastBar.addEventListener('click', (event) => {
+  if (event.target.classList === 'forecast-element')
+})  */
 
 // function and events for popup
 const togglePopupClass = () => {
