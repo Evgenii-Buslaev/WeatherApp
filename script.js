@@ -14,6 +14,8 @@ let form = document.querySelector(".form");
 let textInput = document.querySelector(".form-input");
 let closePopup = document.getElementById("close");
 let forecastBlock = document.getElementById("time-weather-prediction");
+let scrollLeft = document.getElementById("scroll-left-btn");
+let scrollRight = document.getElementById("scroll-right-btn");
 
 // object for current state
 let state = {
@@ -36,96 +38,6 @@ let store = {
   humidity: 0,
   visability: 0,
 };
-
-// function for displaying recieved data
-function renderProperties() {
-  let checkData = setInterval(() => {
-    if (city.data_recieved === true) {
-      console.log(store);
-      clearInterval(checkData);
-      // render main weather container
-
-      // time
-      timeString.innerText = `Местное время: ${store.time.split(" ")[1]}`;
-
-      // temperature
-      if ([...store.temperature.toString()][0] !== "-") {
-        document.getElementById(
-          "temperature"
-        ).innerText = `+${store.temperature}°`;
-        document.getElementById(
-          "feels-like"
-        ).innerText = `Ощущается как +${store.feelsLike}°`;
-      } else {
-        document.getElementById(
-          "temperature"
-        ).innerText = `-${store.temperature}°`;
-        document.getElementById(
-          "feels-like"
-        ).innerText = `Ощущается как -${store.feelsLike}°`;
-      }
-
-      // wind
-      document.getElementById(
-        "wind"
-      ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
-      ${(store.wind / 3.6).toFixed(2)} м/c, ${store.windDir}`;
-
-      // humidity
-      document.getElementById(
-        "humidity"
-      ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
-      ${store.humidity}%`;
-
-      // pressure
-      document.getElementById(
-        "pressure"
-      ).innerHTML = `<img src="Icons/marks/pressure.png" alt="pressure image" />
-      ${parseInt(store.pressure * 0.750063755419211)} мм рт. ст.`;
-
-      // condition
-      document.getElementById(
-        "state"
-      ).innerHTML = `<img src=${store.condition.icon} alt='condition_day' />${store.condition.text}`;
-
-      // custom images
-      if (store.condition.text === "Солнечно") {
-        document.getElementById(
-          "state"
-        ).innerHTML = `<img src="Icons/precipitation/sunny.png" alt='condition_day' />${store.condition.text}`;
-      }
-      if (store.condition.text === "Облачно") {
-        document.getElementById(
-          "state"
-        ).innerHTML = `<img src="Icons/precipitation/cloudy.png" alt='condition_day' />${store.condition.text}`;
-      }
-      if (store.condition.text === "Переменная облачность") {
-        document.getElementById(
-          "state"
-        ).innerHTML = `<img src="Icons/precipitation/cloudy_with_sun.png" alt='condition_day' />${store.condition.text}`;
-      }
-      if (store.condition.text === "Дождь") {
-        document.getElementById("state").innerHTML = "Дождь";
-        document.getElementById(
-          "state"
-        ).innerHTML = `<img src="Icons/precipitation/rainy.png" alt='condition_day' />${store.condition.text}`;
-      }
-
-      // render forecast
-      forecastBlock.innerHTML = "";
-      let firstElementIndex = +store.time.match(/\d+(?=\:)/) + 1;
-      for (let i = firstElementIndex; i < 24; i++) {
-        forecastBlock.innerHTML += `<div class="forecast-element">
-                                        <div id="time">${i}:00</div>
-                                        <div id="state">
-                                        <img src=${store.forecast[i].condition.icon} alt='condition_day' />
-                                        </div>
-                                        <div id="time-temperature">+${store.forecast[i].temp_c}°</div>
-                                    </div>`;
-      }
-    }
-  }, 100);
-}
 
 // function for getting user's location
 function getLocation() {
@@ -225,6 +137,98 @@ function getAPIData() {
   }, 100);
 }
 
+// function for displaying recieved data
+function renderProperties() {
+  let checkData = setInterval(() => {
+    if (city.data_recieved === true) {
+      console.log(store);
+      clearInterval(checkData);
+      // render main weather container
+
+      // time
+      timeString.innerText = `Местное время: ${store.time.split(" ")[1]}`;
+
+      // temperature
+      if ([...store.temperature.toString()][0] !== "-") {
+        document.getElementById(
+          "temperature"
+        ).innerText = `+${store.temperature}°`;
+        document.getElementById(
+          "feels-like"
+        ).innerText = `Ощущается как +${store.feelsLike}°`;
+      } else {
+        document.getElementById(
+          "temperature"
+        ).innerText = `-${store.temperature}°`;
+        document.getElementById(
+          "feels-like"
+        ).innerText = `Ощущается как -${store.feelsLike}°`;
+      }
+
+      // wind
+      document.getElementById(
+        "wind"
+      ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
+      ${(store.wind / 3.6).toFixed(2)} м/c, ${store.windDir}`;
+
+      // humidity
+      document.getElementById(
+        "humidity"
+      ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
+      ${store.humidity}%`;
+
+      // pressure
+      document.getElementById(
+        "pressure"
+      ).innerHTML = `<img src="Icons/marks/pressure.png" alt="pressure image" />
+      ${parseInt(store.pressure * 0.750063755419211)} мм рт. ст.`;
+
+      // condition
+      document.getElementById(
+        "state"
+      ).innerHTML = `<img src=${store.condition.icon} alt='condition_day' />${store.condition.text}`;
+
+      // custom images
+      if (store.condition.text === "Солнечно") {
+        document.getElementById(
+          "state"
+        ).innerHTML = `<img src="Icons/precipitation/sunny.png" alt='condition_day' />${store.condition.text}`;
+      }
+      if (store.condition.text === "Облачно") {
+        document.getElementById(
+          "state"
+        ).innerHTML = `<img src="Icons/precipitation/cloudy.png" alt='condition_day' />${store.condition.text}`;
+      }
+      if (store.condition.text === "Переменная облачность") {
+        document.getElementById(
+          "state"
+        ).innerHTML = `<img src="Icons/precipitation/cloudy_with_sun.png" alt='condition_day' />${store.condition.text}`;
+      }
+      if (store.condition.text === "Дождь") {
+        document.getElementById("state").innerHTML = "Дождь";
+        document.getElementById(
+          "state"
+        ).innerHTML = `<img src="Icons/precipitation/rainy.png" alt='condition_day' />${store.condition.text}`;
+      }
+
+      // render forecast
+      forecastBlock.innerHTML = "";
+      let firstElementIndex = +store.time.match(/\d+(?=\:)/) + 1;
+
+      for (let i = firstElementIndex; i < 24; i++) {
+        forecastBlock.innerHTML += `<div class="forecast-element">
+                                        <div id="time">${i}:00</div>
+                                        <div id="state">
+                                        <img src=${store.forecast[i].condition.icon} alt='condition_day' />
+                                        </div>
+                                        <div id="time-temperature">+${store.forecast[i].temp_c}°</div>
+                                    </div>`;
+      }
+    }
+  }, 100);
+}
+
+// loaded page
 let question = confirm("Определить Ваш город автоматически?");
 
 if (question) {
@@ -246,6 +250,14 @@ locationBtn.addEventListener("click", () => {
       clearInterval(check);
     }
   }, 100);
+});
+
+scrollRight.addEventListener("click", () => {
+  forecastBlock.lastChild.scrollIntoView({ behavior: "smooth" });
+});
+
+scrollLeft.addEventListener("click", () => {
+  forecastBlock.firstChild.scrollIntoView({ behavior: "smooth" });
 });
 
 // function and events for popup

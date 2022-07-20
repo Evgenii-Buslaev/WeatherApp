@@ -23,6 +23,12 @@
 /* html {
   background-color: rgb(141, 128, 128);
 } */
+
+hr {
+  width: 70vw;
+  margin: auto;
+}
+
 .weather-container {
   margin: 1rem auto;
   text-align: center;
@@ -50,22 +56,57 @@
   border-radius: 50%;
 }
 
-#location-btn:hover {
+#location-btn:hover,
+#scroll-left-btn:hover,
+#scroll-right-btn:hover {
   opacity: 0.6;
   cursor: pointer;
 }
 
-#location-btn img:hover {
+#location-btn img:hover,
+#scroll-left-btn img:hover,
+#scroll-right-btn img:hover {
   opacity: 0.8;
 }
 
-#location-btn img {
+#location-btn img,
+#scroll-left-btn img,
+#scroll-right-btn img {
   transition-property: all;
   transition-duration: 0.5s;
   display: block;
   margin: 1rem auto 0;
   width: 30px;
   height: 30px;
+}
+
+#scroll-left-btn,
+#scroll-right-btn {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(164, 177, 176);
+  border-radius: 50%;
+}
+
+#scroll-left-btn {
+  position: absolute;
+  left: 5%;
+}
+
+#scroll-right-btn {
+  position: absolute;
+  right: 5%;
+}
+
+#scroll-left-btn img,
+#scroll-right-btn img {
+  width: 15px;
+  height: 15px;
+  margin: 0.5rem auto;
+}
+
+#scroll-left-btn img {
+  transform: rotate(180deg);
 }
 
 #city {
@@ -105,6 +146,7 @@
   display: flex;
   align-items: center;
 }
+
 #state img {
   width: 40px;
   height: 40px;
@@ -129,14 +171,22 @@
   padding: 1rem 3rem 0;
 }
 
-#time-weather-prediction {
+.weather-forecast-bar {
+  display: flex;
+  justify-content: start;
   margin: auto;
   width: 70vw;
+}
+
+#time-weather-prediction {
+  margin: auto;
+  width: auto;
   display: flex;
   justify-content: space-evenly;
-  overflow-x: auto;
+  overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  filter: drop-shadow(0 0 0.75rem crimson);
 }
 
 #time-weather-prediction::-webkit-scrollbar {
@@ -163,6 +213,9 @@
   #pressure {
     padding: 1rem 1rem 0;
   }
+  #time-weather-prediction {
+    justify-content: start;
+  }
 }
 
 @media (max-width: 570px) {
@@ -180,6 +233,19 @@
     margin-top: 0.7rem;
     width: 20px;
     height: 20px;
+  }
+
+  #scroll-left-btn,
+  #scroll-right-btn {
+    width: 20px;
+    height: 20px;
+  }
+
+  #scroll-left-btn img,
+  #scroll-right-btn img {
+    width: 10px;
+    height: 10px;
+    margin: 0.3rem auto;
   }
 }
 
