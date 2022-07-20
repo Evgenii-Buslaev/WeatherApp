@@ -143,7 +143,17 @@ function getAPIData() {
 function renderProperties() {
   let checkData = setInterval(() => {
     if (city.data_recieved === true) {
-      console.log(store);
+      // background
+      if (store.isDay === 1) {
+        document.querySelector("body").style.backgroundColor =
+          "rgb(144, 206, 247)";
+        document.querySelector("body").style.color = "black";
+      } else {
+        document.querySelector("body").style.backgroundColor =
+          "rgb(17, 45, 63)";
+        document.querySelector("body").style.color = "rgb(152, 165, 173)";
+      }
+
       clearInterval(checkData);
       // render main weather container
 
@@ -191,7 +201,7 @@ function renderProperties() {
       ).innerHTML = `<img src=${store.condition.icon} alt='condition_day' />${store.condition.text}`;
 
       // custom images
-      if (store.condition.text === "Солнечно") {
+      if (store.condition.text === "Ясно") {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/sunny.png" alt='condition_day' />${store.condition.text}`;
