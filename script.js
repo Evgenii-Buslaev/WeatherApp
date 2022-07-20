@@ -190,7 +190,7 @@ function renderProperties() {
       ).innerHTML = `<img src=${store.condition.icon} alt='condition_day' />${store.condition.text}`;
 
       // custom images
-      /* if (store.condition.text === "Солнечно") {
+      if (store.condition.text === "Солнечно") {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/sunny.png" alt='condition_day' />${store.condition.text}`;
@@ -210,7 +210,7 @@ function renderProperties() {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/rainy.png" alt='condition_day' />${store.condition.text}`;
-      } */
+      }
 
       // render forecast
       forecastBlock.innerHTML = "";
@@ -296,4 +296,7 @@ const handleSubmit = (e) => {
 
 form.addEventListener("submit", handleSubmit);
 textInput.addEventListener("input", handleInput);
-closePopup.addEventListener("click", togglePopupClass);
+closePopup.addEventListener("click", () => {
+  cityName.innerText = store.city;
+  togglePopupClass();
+});

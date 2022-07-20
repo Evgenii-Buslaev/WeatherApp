@@ -352,7 +352,7 @@ hr {
 .form-input {
   border: none;
   border-bottom: 2px solid #eee;
-  color: #fff;
+  color: rgb(65, 46, 46);
   background: transparent;
   outline: none;
   font-size: 19px;
@@ -362,7 +362,7 @@ hr {
 
 .form-submit {
   background: #000;
-  color: #fff;
+  color: rgb(197, 190, 190);
   width: 18%;
   cursor: pointer;
   border: none;
@@ -371,5 +371,5 @@ hr {
 }
 
 .form-input::placeholder {
-  color: rgb(187, 187, 187);
+  color: rgb(37, 30, 30);
 }
