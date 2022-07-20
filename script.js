@@ -217,9 +217,9 @@ function renderProperties() {
       let firstElementIndex = +store.time.match(/\d+(?=\:)/) + 1;
 
       for (let i = firstElementIndex; i < 24; i++) {
-        forecastBlock.innerHTML += `<div class="forecast-element">
+        forecastBlock.innerHTML += `<div class="forecast-element" id=${i}>
                                         <div id="time">${i}:00</div>
-                                        <div id="state">
+                                        <div id=${i} >
                                         <img id='img' src=${store.forecast[i].condition.icon} alt='condition_day' />
                                         </div>
                                         <div id="time-temperature">+${store.forecast[i].temp_c}°</div>
@@ -228,16 +228,62 @@ function renderProperties() {
 
       // forecast options
 
-      /*   forecastBar.addEventListener("click", (event) => {
+      forecastBar.addEventListener("click", (event) => {
         if (
           event.target.getAttribute("id") === "time" ||
           event.target.getAttribute("id") === "time-temperature" ||
           event.target.getAttribute("id") === "img"
         ) {
-          console.log(event.target);
-          console.log(event.currentTarget);
+          let element = event.target.parentNode;
+          let elementNumber = element.getAttribute("id");
+
+          // time
+          timeString.innerText = `Прогноз на ${elementNumber}:00`;
+
+          // temperature
+          if ([...store.forecast[elementNumber].temp_c.toString()][0] !== "-") {
+            document.getElementById(
+              "temperature"
+            ).innerText = `+${store.forecast[elementNumber].temp_c}°`;
+            document.getElementById(
+              "feels-like"
+            ).innerText = `Ощущается как +${store.forecast[elementNumber].feelslike_c}°`;
+          } else {
+            document.getElementById(
+              "temperature"
+            ).innerText = `-${store.forecast[elementNumber].temp_c}°`;
+            document.getElementById(
+              "feels-like"
+            ).innerText = `Ощущается как -${store.forecast[elementNumber].feelslike_c}°`;
+          }
+
+          // wind
+          document.getElementById(
+            "wind"
+          ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
+          ${(store.forecast[elementNumber].wind_kph / 3.6).toFixed(2)} м/c, ${
+            store.forecast[elementNumber].wind_dir
+          }`;
+
+          // humidity
+          document.getElementById(
+            "humidity"
+          ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
+          ${store.forecast[elementNumber].humidity}%`;
+
+          // pressure
+          document.getElementById(
+            "pressure"
+          ).innerHTML = `<img src="Icons/marks/pressure.png" alt="pressure image" />
+          ${parseInt(
+            store.forecast[elementNumber].pressure_mb * 0.750063755419211
+          )} мм рт. ст.`;
+          // condition
+          document.getElementById(
+            "state"
+          ).innerHTML = `<img src=${store.forecast[elementNumber].condition.icon} alt='condition_day' />${store.forecast[elementNumber].condition.text}`;
         }
-      }); */
+      });
     }
   }, 100);
 }
