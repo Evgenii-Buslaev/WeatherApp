@@ -13,7 +13,7 @@ let time = timeString.innerText.match(/\d+\:\d+/)[0];
 let form = document.querySelector(".form");
 let textInput = document.querySelector(".form-input");
 let closePopup = document.getElementById("close");
-let forecastBlock = document.getElementById('time-weather-prediction')
+let forecastBlock = document.getElementById("time-weather-prediction");
 
 // object for current state
 let state = {
@@ -112,37 +112,17 @@ function renderProperties() {
       }
 
       // render forecast
-
-      let firstElementIndex = +store.time.match(/\d+(?=\:)/) + 1
-      /* console.log(`cast: ${store.forecast[firstElementIndex].condition.icon}`); */
+      forecastBlock.innerHTML = "";
+      let firstElementIndex = +store.time.match(/\d+(?=\:)/) + 1;
       for (let i = firstElementIndex; i < 24; i++) {
-        if (i < 23) {
         forecastBlock.innerHTML += `<div class="forecast-element">
                                         <div id="time">${i}:00</div>
                                         <div id="state">
                                         <img src=${store.forecast[i].condition.icon} alt='condition_day' />
                                         </div>
                                         <div id="time-temperature">+${store.forecast[i].temp_c}°</div>
-                                    </div>`
-        } else {
-          forecastBlock.innerHTML += `<div class="forecast-element">
-                                        <div id="time">${i}:00</div>
-                                        <div id="state">
-                                        <img src=${store.forecast[i].condition.icon} alt='condition_day' />
-                                        </div>
-                                        <div id="time-temperature">+${store.forecast[i].temp_c}°</div>
-                                    </div>
-                                      <div class="forecast-element">
-                                        <div id="time">00:00</div>
-                                        <div id="state">
-                                        <img src=${store.forecast[0].condition.icon} alt='condition_day' />
-                                        </div>
-                                        <div id="time-temperature">+${store.forecast[0].temp_c}°</div>
-                                    </div>`
-        }
+                                    </div>`;
       }
-
-
     }
   }, 100);
 }
@@ -165,27 +145,27 @@ function getLocation() {
       body: JSON.stringify(query),
     };
 
-  (async () => {
-    // changing city name to current city (without a prefix)
-    try {
-    let promise = await fetch(locationUrl, options)
-    let response = await promise.json()
-    let result = await response
-    console.log(result);
-    cityName.innerText =  result.suggestions[0].data.city_with_type.match(
-      /(?<=\s)\p{Alpha}+/gu
-    );
-    state.city_defined = true;
-    } catch {
-      console.log("error", error);
-      cityName.innerText = 'Москва'
-      state.innerText = "Москва";
-      state.city_defined = true;
-    }
-    })()
+    (async () => {
+      // changing city name to current city (without a prefix)
+      try {
+        let promise = await fetch(locationUrl, options);
+        let response = await promise.json();
+        let result = await response;
+        console.log(result);
+        cityName.innerText =
+          result.suggestions[0].data.city_with_type.match(
+            /(?<=\s)\p{Alpha}+/gu
+          );
+        state.city_defined = true;
+      } catch {
+        console.log("error", error);
+        cityName.innerText = "Москва";
+        state.innerText = "Москва";
+        state.city_defined = true;
+      }
+    })();
   });
 }
-
 
 // function for getting current weather
 function getAPIData() {
@@ -209,8 +189,8 @@ function getAPIData() {
             },
             forecast: {
               forecastday: {
-                0: { hour }
-              }
+                0: { hour },
+              },
             },
             location: { name, localtime },
           } = result;
@@ -291,7 +271,3 @@ const handleSubmit = (e) => {
 form.addEventListener("submit", handleSubmit);
 textInput.addEventListener("input", handleInput);
 closePopup.addEventListener("click", togglePopupClass);
-
-
-
-
