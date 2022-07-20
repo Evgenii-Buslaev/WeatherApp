@@ -2,7 +2,7 @@
 const locationUrl =
   "https://suggestions.dadata.ru/suggestions/api/4_1/rs/geolocate/address";
 const token = "7b0d07bc549fc06afcf392d74f2aa6beb81a784a";
-const linkAPI = "http://api.weatherapi.com/v1/current.json";
+const linkAPI = "http://api.weatherapi.com/v1/forecast.json";
 const keyAPI = "6861653a70004c5f944134019221707";
 
 // getting needed DOM-elements
@@ -246,3 +246,7 @@ const handleSubmit = (e) => {
 form.addEventListener("submit", handleSubmit);
 textInput.addEventListener("input", handleInput);
 closePopup.addEventListener("click", togglePopupClass);
+
+
+
+
