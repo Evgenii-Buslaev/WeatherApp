@@ -27,6 +27,7 @@
 hr {
   width: 70vw;
   margin: auto;
+  color: black
 }
 
 .weather-container {
@@ -43,10 +44,39 @@ hr {
 
 .wind-block {
   margin: 1rem 10%;
+  padding: 1rem;
   text-align: center;
   width: auto;
   height: auto;
-  border: solid black;
+  box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
+  border-radius: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  transition-property: all;
+  transition-duration: 1s;
+}
+
+.humidity-block {
+  margin: 1rem 10%;
+  padding: 1rem;
+  text-align: center;
+  width: auto;
+  height: auto;
+  box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
+  border-radius: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  transition-property: all;
+  transition-duration: 1s;
+}
+
+.day-duration-block {
+  margin: 1rem 10%;
+  padding: 1rem;
+  text-align: center;
+  width: auto;
+  height: auto;
+  box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
   border-radius: 2rem;
   display: flex;
   justify-content: space-evenly;

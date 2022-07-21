@@ -148,10 +148,6 @@ function renderProperties() {
         document.querySelector("body").style.backgroundColor =
           "rgb(144, 206, 247)";
         document.querySelector("body").style.color = "black";
-      } else {
-        document.querySelector("body").style.backgroundColor =
-          "rgb(17, 45, 63)";
-        document.querySelector("body").style.color = "rgb(152, 165, 173)";
       }
 
       clearInterval(checkData);
@@ -182,12 +178,15 @@ function renderProperties() {
         "wind"
       ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
       ${(store.wind / 3.6).toFixed(2)} м/c, ${store.windDir}`;
+      document.getElementById('wind-dir').innerText = `Направление ветра: ${store.windDir}`
+      document.getElementById('wind-speed').innerText = `Скорость ветра: ${(store.wind / 3.6).toFixed(2)} м/c`
 
       // humidity
       document.getElementById(
         "humidity"
       ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
       ${store.humidity}%`;
+      document.querySelector('.humidity-text').innerText = `Влажность: ${store.humidity}%`
 
       // pressure
       document.getElementById(
@@ -243,6 +242,12 @@ function renderProperties() {
                                     </div>`;
       }
 
+      if (store.isDay !== 1) {
+        document.querySelector("body").style.backgroundColor =
+          "rgb(17, 45, 63)";
+        document.querySelector("body").style.color = "rgb(152, 165, 173)";
+      }
+
       // forecast options
 
       forecastBar.addEventListener("click", (event) => {
@@ -285,12 +290,15 @@ function renderProperties() {
           ${(store.forecast[elementNumber].wind_kph / 3.6).toFixed(2)} м/c, ${
               store.forecast[elementNumber].wind_dir
             }`;
+            document.getElementById('wind-dir').innerText = `Направление ветра: ${store.forecast[elementNumber].wind_dir}`
+            document.getElementById('wind-speed').innerText = `Скорость ветра: ${(store.forecast[elementNumber].wind_kph / 3.6).toFixed(2)} м/c`
 
             // humidity
             document.getElementById(
               "humidity"
             ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
           ${store.forecast[elementNumber].humidity}%`;
+          document.getElementById('humidity-text').innerText = `Влажность: ${store.forecast[elementNumber].humidity}`
 
             // pressure
             document.getElementById(
