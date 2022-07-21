@@ -25,6 +25,7 @@ let state = {
   lng: null,
   city_defined: false,
   data_recieved: false,
+  tries: 0,
 };
 
 // object for weather
@@ -131,13 +132,22 @@ function getAPIData() {
             sunset,
           };
           city.data_recieved = true;
+          state.tries = 0;
           renderProperties();
         })
         .catch((err) => {
-          console.log("error", err);
-          alert("Такой город не найден");
-          cityName.innerHTML = "Москва";
-          getAPIData();
+          if (state.tries > 1) {
+            state.tries = 0;
+            alert(
+              "Сервер в данный момент недоступен. Попробуйте зайти позднее."
+            );
+          } else {
+            console.log("error", err);
+            alert("Такой город не найден, пробуем еще раз...");
+            state.tries++;
+            cityName.innerHTML = "Москва";
+            getAPIData();
+          }
         });
       clearInterval(check);
     }
