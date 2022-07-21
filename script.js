@@ -103,7 +103,10 @@ function getAPIData() {
             },
             forecast: {
               forecastday: {
-                0: { hour },
+                0: {
+                  astro: { sunrise, sunset },
+                  hour,
+                },
               },
             },
             location: { name, localtime },
@@ -124,6 +127,8 @@ function getAPIData() {
             humidity,
             visability,
             forecast: hour,
+            sunrise,
+            sunset,
           };
           city.data_recieved = true;
           renderProperties();
@@ -178,15 +183,33 @@ function renderProperties() {
         "wind"
       ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
       ${(store.wind / 3.6).toFixed(2)} м/c, ${store.windDir}`;
-      document.getElementById('wind-dir').innerText = `Направление ветра: ${store.windDir}`
-      document.getElementById('wind-speed').innerText = `Скорость ветра: ${(store.wind / 3.6).toFixed(2)} м/c`
+      document.getElementById(
+        "wind-dir"
+      ).innerText = `Направление ветра: ${store.windDir}`;
+      document.getElementById("wind-speed").innerText = `Скорость ветра: ${(
+        store.wind / 3.6
+      ).toFixed(2)} м/c`;
 
       // humidity
       document.getElementById(
         "humidity"
       ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
       ${store.humidity}%`;
-      document.querySelector('.humidity-text').innerText = `Влажность: ${store.humidity}%`
+      document.querySelector(
+        ".humidity-text"
+      ).innerText = `Влажность: ${store.humidity}%`;
+
+      // day duration
+      document.getElementById("sunrise").innerText = `${store.sunrise.match(
+        /\d+\:\d+/
+      )}`;
+      document.getElementById("sunset").innerText = `${
+        +store.sunset.match(/\d+\:\d+/)[0].split(":")[0] + 12
+      }:${+store.sunset.match(/\d+\:\d+/)[0].split(":")[1]}`;
+
+      document.getElementById(
+        "day-duration"
+      ).innerText = `Продолжительность дня: ${getDayDuration()}`;
 
       // pressure
       document.getElementById(
@@ -204,28 +227,37 @@ function renderProperties() {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/sunny.png" alt='condition_day' />${store.condition.text}`;
-        document.querySelector('body').style.backgroundImage = '' 
-        document.querySelector('body').style.backgroundColor = 'rgba(112, 170, 209, 0.822)' 
+        document.querySelector("body").style.backgroundImage = "";
+        document.querySelector("body").style.backgroundColor =
+          "rgba(112, 170, 209, 0.822)";
       }
-      if (store.condition.text.split(' ').indexOf('Облачно') >= 0 || store.condition.text.split(' ').indexOf('облачность')  >= 0) {
+      if (
+        store.condition.text.split(" ").indexOf("Облачно") >= 0 ||
+        store.condition.text.split(" ").indexOf("облачность") >= 0
+      ) {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/cloudy.png" alt='condition_day' />${store.condition.text}`;
-        document.querySelector('body').style.backgroundImage = '' 
-        document.querySelector('body').style.backgroundColor = 'rgba(204, 209, 212, 0.822)'
+        document.querySelector("body").style.backgroundImage = "";
+        document.querySelector("body").style.backgroundColor =
+          "rgba(204, 209, 212, 0.822)";
       }
       if (store.condition.text === "Переменная облачность") {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/cloudy_with_sun.png" alt='condition_day' />${store.condition.text}`;
       }
-      if (store.condition.text.split(' ').indexOf('дождь') >= 0 || store.condition.text.split(' ').indexOf('Дождь')  >= 0) {
+      if (
+        store.condition.text.split(" ").indexOf("дождь") >= 0 ||
+        store.condition.text.split(" ").indexOf("Дождь") >= 0
+      ) {
         document.getElementById("state").innerHTML = "Дождь";
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/rainy.png" alt='condition_day' />${store.condition.text}`;
-        document.querySelector('body').style.backgroundImage = '' 
-        document.querySelector('body').style.backgroundColor = 'rgba(115, 120, 122, 0.822)'
+        document.querySelector("body").style.backgroundImage = "";
+        document.querySelector("body").style.backgroundColor =
+          "rgba(115, 120, 122, 0.822)";
       }
 
       // render forecast
@@ -290,15 +322,23 @@ function renderProperties() {
           ${(store.forecast[elementNumber].wind_kph / 3.6).toFixed(2)} м/c, ${
               store.forecast[elementNumber].wind_dir
             }`;
-            document.getElementById('wind-dir').innerText = `Направление ветра: ${store.forecast[elementNumber].wind_dir}`
-            document.getElementById('wind-speed').innerText = `Скорость ветра: ${(store.forecast[elementNumber].wind_kph / 3.6).toFixed(2)} м/c`
+            document.getElementById(
+              "wind-dir"
+            ).innerText = `Направление ветра: ${store.forecast[elementNumber].wind_dir}`;
+            document.getElementById(
+              "wind-speed"
+            ).innerText = `Скорость ветра: ${(
+              store.forecast[elementNumber].wind_kph / 3.6
+            ).toFixed(2)} м/c`;
 
             // humidity
             document.getElementById(
               "humidity"
             ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
           ${store.forecast[elementNumber].humidity}%`;
-          document.getElementById('humidity-text').innerText = `Влажность: ${store.forecast[elementNumber].humidity}`
+            document.querySelector(
+              ".humidity-text"
+            ).innerText = `Влажность: ${store.forecast[elementNumber].humidity}%`;
 
             // pressure
             document.getElementById(
@@ -319,6 +359,22 @@ function renderProperties() {
       });
     }
   }, 100);
+}
+
+function getDayDuration() {
+  let hours =
+    +store.sunset.match(/\d+\:\d+/)[0].split(":")[0] +
+    12 -
+    +store.sunrise.match(/\d+\:\d+/)[0].split(":")[0];
+  let minutes =
+    +store.sunset.match(/\d+\:\d+/)[0].split(":")[1] -
+    +store.sunrise.match(/\d+\:\d+/)[0].split(":")[1];
+
+  if (minutes < 0) {
+    hours--;
+    minutes = 60 - minutes * -1;
+  }
+  return `${hours}:${minutes}`;
 }
 
 // loaded page

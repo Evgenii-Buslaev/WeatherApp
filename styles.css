@@ -6,6 +6,11 @@
   font-family: "PT Sans Narrow", sans-serif;
 }
 
+body {
+  transition-property: all;
+  transition-duration: 1s;
+}
+
 /* .upper-container {
   width: 100vw;
   height: 20vh;
@@ -27,7 +32,7 @@
 hr {
   width: 70vw;
   margin: auto;
-  color: black
+  color: black;
 }
 
 .weather-container {
@@ -82,6 +87,34 @@ hr {
   justify-content: space-evenly;
   transition-property: all;
   transition-duration: 1s;
+}
+
+#arc {
+  margin-top: 2rem;
+  width: 150px;
+  height: 40px;
+  border-radius: 50% / 100% 100% 0 0;
+  border: solid rgba(211, 223, 221, 0.781);
+  border-bottom: none;
+}
+
+.sun-rise-set {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+#sun {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgb(214, 177, 73);
+  transition-property: all;
+  transition-duration: 1s;
+}
+
+#sunset {
+  margin-left: 85px;
 }
 
 #location {
