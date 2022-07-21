@@ -9,7 +9,7 @@ const keyAPI = "6861653a70004c5f944134019221707";
 let cityName = document.getElementById("city");
 let locationBtn = document.getElementById("location-btn");
 let timeString = document.getElementById("time");
-let time = timeString.innerText.match(/\d+\:\d+/)[0];
+let time;
 let form = document.querySelector(".form");
 let textInput = document.querySelector(".form-input");
 let closePopup = document.getElementById("close");
@@ -211,6 +211,22 @@ function renderProperties() {
         "day-duration"
       ).innerText = `Продолжительность дня: ${getDayDuration()}`;
 
+      // sun animation
+
+      let dayDuration = document
+        .getElementById("day-duration")
+        .innerText.match(/\d+(?=.)/);
+      let localTime = store.time.split(" ")[1];
+      let localHours = +localTime.match(/\d+(?=:)/);
+      let sunriseHours = +document
+        .getElementById("sunrise")
+        .innerText.split(":")[0];
+      let difTime = +localHours - +sunriseHours;
+      let sunPosition = (difTime * 180) / dayDuration;
+      document.getElementById(
+        "sun"
+      ).style.transform = `rotateZ(${sunPosition}deg)`;
+
       // pressure
       document.getElementById(
         "pressure"
@@ -374,7 +390,7 @@ function getDayDuration() {
     hours--;
     minutes = 60 - minutes * -1;
   }
-  return `${hours}:${minutes}`;
+  return `${hours} ч. ${minutes} мин. `;
 }
 
 // loaded page

@@ -90,9 +90,9 @@ hr {
 }
 
 #arc {
-  margin-top: 2rem;
-  width: 150px;
-  height: 40px;
+  margin: 1rem auto 0;
+  width: 200px;
+  height: 100px;
   border-radius: 50% / 100% 100% 0 0;
   border: solid rgba(211, 223, 221, 0.781);
   border-bottom: none;
@@ -105,16 +105,22 @@ hr {
 }
 
 #sun {
+  position: relative;
+  left: 7px;
+  bottom: 10px;
   width: 15px;
   height: 15px;
   border-radius: 50%;
   background-color: rgb(214, 177, 73);
-  transition-property: all;
-  transition-duration: 1s;
+  transition-property: transform;
+  transition-duration: 3s;
+  transition-timing-function: linear;
+  transform-origin: 105px;
+  /* transform: rotateZ(30deg); */
 }
 
 #sunset {
-  margin-left: 85px;
+  margin-left: 160px;
 }
 
 #location {
