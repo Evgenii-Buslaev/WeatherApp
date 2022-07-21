@@ -201,26 +201,32 @@ function renderProperties() {
       ).innerHTML = `<img src=${store.condition.icon} alt='condition_day' />${store.condition.text}`;
 
       // custom images
-      if (store.condition.text === "Ясно") {
+      if (store.condition.text === "Солнечно") {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/sunny.png" alt='condition_day' />${store.condition.text}`;
+        document.querySelector('body').style.backgroundImage = '' 
+        document.querySelector('body').style.backgroundColor = 'rgba(112, 170, 209, 0.822)' 
       }
-      if (store.condition.text === "Облачно") {
+      if (store.condition.text.split(' ').indexOf('Облачно') >= 0 || store.condition.text.split(' ').indexOf('облачность')  >= 0) {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/cloudy.png" alt='condition_day' />${store.condition.text}`;
+        document.querySelector('body').style.backgroundImage = '' 
+        document.querySelector('body').style.backgroundColor = 'rgba(204, 209, 212, 0.822)'
       }
       if (store.condition.text === "Переменная облачность") {
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/cloudy_with_sun.png" alt='condition_day' />${store.condition.text}`;
       }
-      if (store.condition.text === "Дождь") {
+      if (store.condition.text.split(' ').indexOf('дождь') >= 0 || store.condition.text.split(' ').indexOf('Дождь')  >= 0) {
         document.getElementById("state").innerHTML = "Дождь";
         document.getElementById(
           "state"
         ).innerHTML = `<img src="Icons/precipitation/rainy.png" alt='condition_day' />${store.condition.text}`;
+        document.querySelector('body').style.backgroundImage = '' 
+        document.querySelector('body').style.backgroundColor = 'rgba(115, 120, 122, 0.822)'
       }
 
       // render forecast

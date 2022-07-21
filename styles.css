@@ -34,7 +34,7 @@ hr {
   text-align: center;
   width: auto;
   height: auto;
-  border: solid rgb(152, 165, 173);
+  box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
   border-radius: 2rem;
   display: block;
   transition-property: all;
@@ -67,6 +67,7 @@ hr {
   height: 60px;
   background-color: rgb(164, 177, 176);
   border-radius: 50%;
+  margin-top: 0.5rem;
 }
 
 #location-btn:hover,
@@ -193,7 +194,7 @@ hr {
   overflow: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  filter: drop-shadow(0 0 0.75rem rgb(38, 138, 196));
+  /* filter: drop-shadow(0 0 0.75rem rgb(38, 138, 196)); */
 }
 
 #time-weather-prediction::-webkit-scrollbar {
@@ -373,9 +374,5 @@ hr {
 }
 
 .form-input::placeholder {
-  color: rgb(37, 30, 30);
-}
-
-h1 {
-  color: rgba(83, 186, 255, 0.822);
+  color: rgb(204, 191, 191);
 }
