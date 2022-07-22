@@ -116,7 +116,6 @@ hr {
   transition-duration: 3s;
   transition-timing-function: linear;
   transform-origin: 105px;
-  /* transform: rotateZ(30deg); */
 }
 
 #sunset {

@@ -26,6 +26,7 @@ let state = {
   city_defined: false,
   data_recieved: false,
   tries: 0,
+  sun_position: 0,
 };
 
 // object for weather
@@ -223,6 +224,11 @@ function renderProperties() {
 
       // sun animation
 
+      if (state.sun_position != 0) {
+        document.getElementById(
+          "sun"
+        ).style.transform = `rotateZ(${-state.sun_position}deg)`;
+      }
       let dayDuration = document
         .getElementById("day-duration")
         .innerText.match(/\d+(?=.)/);
@@ -233,9 +239,15 @@ function renderProperties() {
         .innerText.split(":")[0];
       let difTime = +localHours - +sunriseHours;
       let sunPosition = (difTime * 180) / dayDuration;
-      document.getElementById(
-        "sun"
-      ).style.transform = `rotateZ(${sunPosition}deg)`;
+      state.sun_position - sunPosition;
+      console.log(sunPosition);
+      if (sunPosition > 0) {
+        document.getElementById(
+          "sun"
+        ).style.transform = `rotateZ(${sunPosition}deg)`;
+      } else {
+        document.getElementById("sun").style.transform = `rotateZ(0deg)`;
+      }
 
       // pressure
       document.getElementById(
@@ -400,6 +412,7 @@ function getDayDuration() {
     hours--;
     minutes = 60 - minutes * -1;
   }
+
   return `${hours} ч. ${minutes} мин. `;
 }
 
