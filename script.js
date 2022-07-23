@@ -18,7 +18,8 @@ let scrollLeft = document.getElementById("scroll-left-btn");
 let scrollRight = document.getElementById("scroll-right-btn");
 let weatherData = document.querySelector(".weather-data");
 let forecastBar = document.querySelector(".weather-forecast-bar");
-
+let submitBtn = document.getElementById("submit-button");
+let inputCity = document.getElementById("text-input");
 // object for current state
 let state = {
   lat: null,
@@ -481,12 +482,13 @@ const handleInput = (e) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  const value = cityName;
-
-  if (!value) return null;
+  if (!cityName) return null;
   getAPIData();
   togglePopupClass();
+  textInput.value = "";
 };
+
+submitBtn.addEventListener("click", handleSubmit);
 
 form.addEventListener("submit", handleSubmit);
 textInput.addEventListener("input", handleInput);
