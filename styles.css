@@ -47,34 +47,9 @@ hr {
   transition-duration: 1s;
 }
 
-.wind-block {
-  margin: 1rem 10%;
-  padding: 1rem;
-  text-align: center;
-  width: auto;
-  height: auto;
-  box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
-  border-radius: 2rem;
-  display: flex;
-  justify-content: space-evenly;
-  transition-property: all;
-  transition-duration: 1s;
-}
-
-.humidity-block {
-  margin: 1rem 10%;
-  padding: 1rem;
-  text-align: center;
-  width: auto;
-  height: auto;
-  box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
-  border-radius: 2rem;
-  display: flex;
-  justify-content: space-evenly;
-  transition-property: all;
-  transition-duration: 1s;
-}
-
+.wind-block,
+.humidity-block,
+.visability-block,
 .day-duration-block {
   margin: 1rem 10%;
   padding: 1rem;
@@ -85,6 +60,7 @@ hr {
   border-radius: 2rem;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   transition-property: all;
   transition-duration: 1s;
 }
@@ -94,7 +70,7 @@ hr {
   width: 200px;
   height: 100px;
   border-radius: 50% / 100% 100% 0 0;
-  border: solid rgba(211, 223, 221, 0.781);
+  border: solid rgba(78, 80, 80, 0.781);
   border-bottom: none;
 }
 
@@ -120,6 +96,17 @@ hr {
 
 #sunset {
   margin-left: 160px;
+}
+
+#car {
+  margin: 0.5rem 0;
+  width: 70px;
+  height: 70px;
+  background-color: rgb(94, 92, 92);
+  box-shadow: 0 0 0.5rem 0.5rem rgb(94, 92, 92);
+  border-radius: 1rem;
+  transition-property: transform;
+  transition-duration: 1s;
 }
 
 #location {

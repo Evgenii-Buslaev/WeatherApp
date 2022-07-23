@@ -160,6 +160,7 @@ function getAPIData() {
 
 // function for displaying recieved data
 function renderProperties() {
+  console.log(store);
   let checkData = setInterval(() => {
     if (state.data_recieved === true) {
       // background
@@ -212,6 +213,11 @@ function renderProperties() {
       document.querySelector(
         ".humidity-text"
       ).innerText = `Влажность: ${store.humidity}%`;
+
+      // visability
+      document.getElementById("visability").innerHTML = `Видимость: 
+      ${store.visability} км`;
+      document.getElementById("car").style.opacity = `${store.visability / 25}`;
 
       // day duration
       console.log(store.sunrise);
