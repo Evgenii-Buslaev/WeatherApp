@@ -184,12 +184,15 @@ hr {
 }
 
 #city {
+  margin-top: 0.5rem;
   font-size: 2rem;
   transition-property: all;
   transition-duration: 0.5s;
 }
 
 #city:hover {
+  transition-property: all;
+  transition-duration: 0.5s;
   cursor: pointer;
   opacity: 0.8;
   color: rgb(110, 196, 223);

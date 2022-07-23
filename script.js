@@ -68,15 +68,16 @@ function getLocation() {
         let promise = await fetch(locationUrl, options);
         let response = await promise.json();
         let result = await response;
-        console.log(result);
         cityName.innerText =
           result.suggestions[0].data.city_with_type.match(
             /(?<=\s)\p{Alpha}+/gu
           );
+        store.city = cityName.innerText;
         state.city_defined = true;
       } catch {
         console.log("error", error);
         cityName.innerText = "Москва";
+        store.city = "Москва";
         state.innerText = "Москва";
         state.city_defined = true;
       }
@@ -89,7 +90,7 @@ function getAPIData() {
   let check = setInterval(() => {
     if (state.city_defined === true) {
       // getting current weather data
-      fetch(`${linkAPI}?key=${keyAPI}&q=${cityName.innerText}&lang=ru`)
+      fetch(`${linkAPI}?key=${keyAPI}&q=${store.city}&lang=ru`)
         .then((response) => response.json())
         .then((result) => {
           const {
@@ -133,7 +134,7 @@ function getAPIData() {
             sunrise,
             sunset,
           };
-          city.data_recieved = true;
+          state.data_recieved = true;
           state.tries = 0;
           renderProperties();
         })
@@ -145,9 +146,10 @@ function getAPIData() {
             );
           } else {
             console.log("error", err);
-            alert("Такой город не найден, пробуем еще раз...");
+            alert("Такой город не найден.");
             state.tries++;
             cityName.innerHTML = "Москва";
+            store.city = "Москва";
             getAPIData();
           }
         });
@@ -159,7 +161,7 @@ function getAPIData() {
 // function for displaying recieved data
 function renderProperties() {
   let checkData = setInterval(() => {
-    if (city.data_recieved === true) {
+    if (state.data_recieved === true) {
       // background
       if (store.isDay === 1) {
         document.querySelector("body").style.backgroundColor =
@@ -477,7 +479,9 @@ const togglePopupClass = () => {
 cityName.addEventListener("click", togglePopupClass);
 
 const handleInput = (e) => {
-  cityName.innerText = e.target.value;
+  store.city = e.target.value;
+  cityName.style.fontSize = "1.5rem";
+  cityName.innerText = `Ищу ${store.city}...`;
 };
 
 const handleSubmit = (e) => {
@@ -486,6 +490,16 @@ const handleSubmit = (e) => {
   getAPIData();
   togglePopupClass();
   textInput.value = "";
+
+  setTimeout(() => {
+    let checking = setInterval(() => {
+      if (state.data_recieved === true) {
+        cityName.style.fontSize = "2rem";
+        cityName.innerText = store.city;
+        clearInterval(checking);
+      }
+    }, 100);
+  }, 700);
 };
 
 submitBtn.addEventListener("click", handleSubmit);
