@@ -198,25 +198,18 @@ function renderProperties() {
         "wind"
       ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
       ${(store.wind / 3.6).toFixed(2)} м/c, ${store.windDir}`;
-      document.getElementById(
-        "wind-dir"
-      ).innerText = `Направление ветра: ${store.windDir}`;
-      document.getElementById("wind-speed").innerText = `Скорость ветра: ${(
-        store.wind / 3.6
-      ).toFixed(2)} м/c`;
 
       // humidity
       document.getElementById(
         "humidity"
       ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
       ${store.humidity}%`;
-      document.querySelector(
-        ".humidity-text"
-      ).innerText = `Влажность: ${store.humidity}%`;
+      document.querySelector(".humidity-text").innerText = `${store.humidity}%`;
 
       // visability
-      document.getElementById("visability").innerHTML = `Видимость: 
-      ${store.visability} км`;
+      document.getElementById(
+        "visability"
+      ).innerHTML = `${store.visability} км`;
       document.getElementById("car").style.opacity = `${store.visability / 25}`;
 
       // day duration
@@ -319,6 +312,10 @@ function renderProperties() {
 
       // render forecast
       forecastBlock.innerHTML = "";
+      let hour = store.time.split(" ")[1].split(":")[0];
+      if (hour > 22) {
+        forecastBlock.innerHTML = "Ожидайте прогноз через час (с 00:00)";
+      }
       let firstElementIndex = +store.time.match(/\d+(?=\:)/) + 1;
 
       for (let i = firstElementIndex; i < 24; i++) {
@@ -380,14 +377,6 @@ function renderProperties() {
           ${(store.forecast[elementNumber].wind_kph / 3.6).toFixed(2)} м/c, ${
                 store.forecast[elementNumber].wind_dir
               }`;
-              document.getElementById(
-                "wind-dir"
-              ).innerText = `Направление ветра: ${store.forecast[elementNumber].wind_dir}`;
-              document.getElementById(
-                "wind-speed"
-              ).innerText = `Скорость ветра: ${(
-                store.forecast[elementNumber].wind_kph / 3.6
-              ).toFixed(2)} м/c`;
 
               // humidity
               document.getElementById(
@@ -396,7 +385,15 @@ function renderProperties() {
           ${store.forecast[elementNumber].humidity}%`;
               document.querySelector(
                 ".humidity-text"
-              ).innerText = `Влажность: ${store.forecast[elementNumber].humidity}%`;
+              ).innerText = `${store.forecast[elementNumber].humidity}%`;
+
+              // visability
+              document.getElementById(
+                "visability"
+              ).innerHTML = `${store.visability} км`;
+              document.getElementById("car").style.opacity = `${
+                store.forecast[elementNumber].visability / 25
+              }`;
 
               // pressure
               document.getElementById(
