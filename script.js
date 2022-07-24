@@ -251,16 +251,27 @@ function renderProperties() {
       let sunPosition = (difTime * 180) / dayDuration;
       state.sun_position - sunPosition;
       console.log(sunPosition);
-      if (sunPosition > 0) {
-        document.getElementById(
-          "sun"
-        ).style.transform = `rotateZ(${sunPosition}deg)`;
-      } else {
-        document.getElementById("sun").style.transform = `rotateZ(0deg)`;
-      }
-      if (sunPosition > 180) {
-        document.getElementById("sun").style.transform = `rotateZ(180deg)`;
-      }
+
+      console.log(document.documentElement.clientHeight);
+
+      window.addEventListener("scroll", (e) => {
+        if (
+          document.body.scrollTop > 50 ||
+          document.documentElement.scrollTop > 50
+        ) {
+          // scrolling down with mouse
+          if (sunPosition > 0) {
+            document.getElementById(
+              "sun"
+            ).style.transform = `rotateZ(${sunPosition}deg)`;
+          } else {
+            document.getElementById("sun").style.transform = `rotateZ(0deg)`;
+          }
+          if (sunPosition > 180) {
+            document.getElementById("sun").style.transform = `rotateZ(180deg)`;
+          }
+        }
+      });
 
       // pressure
       document.getElementById(
