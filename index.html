@@ -26,7 +26,6 @@
     <title>WeatherApp</title>
   </head>
   <body>
-    <div class="upper-container"></div>
     <div class="background-container">
       <div class="weather-container">
         <div id="location">
@@ -82,18 +81,24 @@
         </div>
       </div>
       <div class="humidity-block">
+        <div class="heading">Влажность</div>
         <div class="humidity-container">
-          Влажность
-          <div class="animated-humidity"></div>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="10"
+            class="animated-humidity"
+          />
+          <div class="humidity-text">20%</div>
         </div>
-        <div class="humidity-text">20%</div>
       </div>
       <div class="visability-block">
+        <div class="heading">Видимость</div>
         <div class="visability-container">
-          Видимость
           <img id="car" src="Icons/marks/car.png" alt="car-image" />
+          <div id="visability">20 км</div>
         </div>
-        <div id="visability">20 км</div>
       </div>
       <div class="day-duration-block">
         <div class="day-duration-container">

@@ -205,6 +205,9 @@ function renderProperties() {
       ).innerHTML = `<img src="Icons/marks/humidity.png" alt="humidity image" />
       ${store.humidity}%`;
       document.querySelector(".humidity-text").innerText = `${store.humidity}%`;
+      document
+        .querySelector(".animated-humidity")
+        .setAttribute("value", `${store.humidity}`);
 
       // visability
       document.getElementById(
@@ -386,6 +389,13 @@ function renderProperties() {
               document.querySelector(
                 ".humidity-text"
               ).innerText = `${store.forecast[elementNumber].humidity}%`;
+
+              document
+                .querySelector(".animated-humidity")
+                .setAttribute(
+                  "value",
+                  `${store.forecast[elementNumber].humidity}`
+                );
 
               // visability
               document.getElementById(

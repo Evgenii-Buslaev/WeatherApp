@@ -11,29 +11,13 @@ body {
   transition-duration: 1s;
 }
 
-/* .upper-container {
-  width: 100vw;
-  height: 20vh;
-
-  background-image: url(Images/background_cloudy.jpeg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-} */
-
-/* html {
-  background-color: rgb(141, 128, 128);
-} */
-
 hr {
   width: 70vw;
   margin: auto;
   color: black;
 }
+
+/* main container */
 
 .weather-container {
   margin: 1rem 10%;
@@ -47,80 +31,19 @@ hr {
   transition-duration: 1s;
 }
 
-.humidity-block,
-.visability-block,
-.day-duration-block {
-  margin: 1rem 10%;
-  padding: 1rem;
-  text-align: center;
-  width: auto;
-  height: auto;
-  box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
-  border-radius: 2rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  transition-property: all;
-  transition-duration: 1s;
-}
-
-.visability-container,
-.humidity-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.animated-humidity {
+#city {
   margin-top: 0.5rem;
-  width: 70px;
-  height: 70px;
-  position: relative;
-  border: solid rgba(78, 80, 80, 0.781);
-  border-radius: 50%;
+  font-size: 2rem;
+  transition-property: all;
+  transition-duration: 0.5s;
 }
 
-#arc {
-  margin: 1rem auto 0;
-  width: 200px;
-  height: 100px;
-  border-radius: 50% / 100% 100% 0 0;
-  border: solid rgba(78, 80, 80, 0.781);
-  border-bottom: none;
-}
-
-.sun-rise-set {
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-}
-
-#sun {
-  position: relative;
-  left: 7px;
-  bottom: 10px;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: rgb(214, 177, 73);
-  transition-property: transform;
-  transition-duration: 3s;
-  transition-timing-function: linear;
-  transform-origin: 105px;
-}
-
-#sunset {
-  margin-left: 160px;
-}
-
-#car {
-  margin: 1rem 0;
-  width: 70px;
-  height: 70px;
-  background-color: rgb(94, 92, 92);
-  box-shadow: 0 0 0.5rem 0.5rem rgb(94, 92, 92);
-  border-radius: 1rem;
-  transition-property: transform;
-  transition-duration: 1s;
+#city:hover {
+  transition-property: all;
+  transition-duration: 0.5s;
+  cursor: pointer;
+  opacity: 0.8;
+  color: rgb(110, 196, 223);
 }
 
 #location {
@@ -182,21 +105,6 @@ hr {
 
 #scroll-left-btn img {
   transform: rotate(180deg);
-}
-
-#city {
-  margin-top: 0.5rem;
-  font-size: 2rem;
-  transition-property: all;
-  transition-duration: 0.5s;
-}
-
-#city:hover {
-  transition-property: all;
-  transition-duration: 0.5s;
-  cursor: pointer;
-  opacity: 0.8;
-  color: rgb(110, 196, 223);
 }
 
 .weather-data {
@@ -289,6 +197,102 @@ hr {
 .forecast-element img {
   width: 40px;
   height: 40px;
+}
+
+/* other-blocks */
+
+.humidity-block,
+.visability-block,
+.day-duration-block {
+  margin: 1rem 10%;
+  padding: 1rem;
+  text-align: center;
+  width: auto;
+  height: auto;
+  box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  transition-property: all;
+  transition-duration: 1s;
+}
+
+.heading {
+  font-size: 1.5rem;
+}
+
+.visability-container,
+.humidity-container {
+  margin-top: 0.5rem;
+  width: 180px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#visability {
+  font-size: 1.5rem;
+}
+
+#car {
+  margin: 1rem 0;
+  width: 70px;
+  height: 70px;
+  background-color: rgb(94, 92, 92);
+  box-shadow: 0 0 0.5rem 0.5rem rgb(94, 92, 92);
+  border-radius: 1rem;
+  transition-property: transform;
+  transition-duration: 1s;
+}
+
+.humidity-text {
+  font-size: 1.5rem;
+}
+
+.animated-humidity {
+  margin-top: 0.5rem;
+  -webkit-appearance: none;
+  width: 70px;
+  height: 3px;
+  outline: none;
+  cursor: pointer;
+  background-color: rgba(78, 80, 80, 0.781);
+  pointer-events: none;
+}
+
+#arc {
+  margin: 1rem auto 0;
+  width: 200px;
+  height: 100px;
+  border-radius: 50% / 100% 100% 0 0;
+  border: solid rgba(78, 80, 80, 0.781);
+  border-bottom: none;
+}
+
+.sun-rise-set {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+#sun {
+  position: relative;
+  left: 7px;
+  bottom: 10px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: rgb(214, 177, 73);
+  transition-property: transform;
+  transition-duration: 3s;
+  transition-timing-function: linear;
+  transform-origin: 105px;
+}
+
+#sunset {
+  margin-left: 160px;
 }
 
 @media (max-width: 900px) {
