@@ -31,6 +31,13 @@ hr {
   transition-duration: 1s;
 }
 
+.other-blocks {
+  margin: 1rem 30%;
+  text-align: center;
+  width: auto;
+  height: auto;
+}
+
 #city {
   margin-top: 0.5rem;
   font-size: 2rem;
@@ -295,7 +302,13 @@ hr {
   margin-left: 160px;
 }
 
+/* media queries */
+
 @media (max-width: 900px) {
+  .other-blocks {
+    margin: 1rem 20%;
+  }
+
   #wind,
   #humidity,
   #pressure {
@@ -342,6 +355,16 @@ hr {
     width: 10px;
     height: 10px;
     margin: 0.3rem auto;
+  }
+
+  .other-blocks {
+    margin: 1rem 10%;
+  }
+}
+
+@media (max-width: 500px) {
+  .other-blocks {
+    margin: 0;
   }
 }
 
