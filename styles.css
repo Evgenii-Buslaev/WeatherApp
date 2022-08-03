@@ -20,9 +20,9 @@ hr {
 /* main container */
 
 .weather-container {
-  margin: 1rem 10%;
+  margin: 1rem auto;
   text-align: center;
-  width: auto;
+  width: 80vw;
   height: auto;
   box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
   border-radius: 2rem;
@@ -32,9 +32,11 @@ hr {
 }
 
 .other-blocks {
-  margin: 1rem 30%;
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
   text-align: center;
-  width: auto;
+  width: 80vw;
   height: auto;
 }
 
@@ -211,11 +213,12 @@ hr {
 .humidity-block,
 .visability-block,
 .day-duration-block {
-  margin: 1rem 10%;
+  margin: auto;
+  /* margin: 1rem 10%; */
   padding: 1rem;
   text-align: center;
-  width: auto;
-  height: auto;
+  width: 25vw;
+  height: 30vh;
   box-shadow: 0.5rem 0.5rem 2rem rgb(101, 107, 109);
   border-radius: 2rem;
   display: flex;
@@ -304,11 +307,23 @@ hr {
 
 /* media queries */
 
-@media (max-width: 900px) {
-  .other-blocks {
-    margin: 1rem 20%;
+@media (max-width: 1030px) {
+  .weather-container {
+    margin: 0.5rem auto;
   }
+  .other-blocks {
+    flex-direction: column;
+  }
+  .humidity-block,
+  .visability-block,
+  .day-duration-block {
+    margin: 0.5rem auto;
+    width: 80vw;
+    height: auto;
+  }
+}
 
+@media (max-width: 900px) {
   #wind,
   #humidity,
   #pressure {
@@ -355,16 +370,6 @@ hr {
     width: 10px;
     height: 10px;
     margin: 0.3rem auto;
-  }
-
-  .other-blocks {
-    margin: 1rem 10%;
-  }
-}
-
-@media (max-width: 500px) {
-  .other-blocks {
-    margin: 0;
   }
 }
 
