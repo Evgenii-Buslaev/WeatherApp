@@ -8,7 +8,7 @@ const keyAPI = "6dec9d7a1bb64cbab05161356222107";
 // getting needed DOM-elements
 let cityName = document.getElementById("city");
 let locationBtn = document.getElementById("location-btn");
-let timeString = document.getElementById("time");
+let timeString = document.getElementById("local-time");
 let time;
 let form = document.querySelector(".form");
 let textInput = document.querySelector(".form-input");
@@ -20,6 +20,7 @@ let weatherData = document.querySelector(".weather-data");
 let forecastBar = document.querySelector(".weather-forecast-bar");
 let submitBtn = document.getElementById("submit-button");
 let inputCity = document.getElementById("text-input");
+
 // object for current state
 let state = {
   lat: null,
@@ -250,9 +251,6 @@ function renderProperties() {
       let difTime = +localHours - +sunriseHours;
       let sunPosition = (difTime * 180) / dayDuration;
       state.sun_position - sunPosition;
-      console.log(sunPosition);
-
-      console.log(document.documentElement.clientHeight);
 
       window.addEventListener("scroll", (e) => {
         if (
