@@ -170,13 +170,11 @@ function renderProperties() {
           "rgb(144, 206, 247)";
         document.querySelector("body").style.color = "black";
       }
-
       clearInterval(checkData);
       // render main weather container
 
       // time
       timeString.innerText = `Местное время: ${store.time.split(" ")[1]}`;
-
       // temperature
       if ([...store.temperature.toString()][0] !== "-") {
         document.getElementById(
@@ -193,13 +191,11 @@ function renderProperties() {
           "feels-like"
         ).innerText = `Ощущается как -${store.feelsLike}°`;
       }
-
       // wind
       document.getElementById(
         "wind"
       ).innerHTML = `<img src="Icons/marks/wind.png" alt="wind image" />
       ${(store.wind / 3.6).toFixed(2)} м/c, ${store.windDir}`;
-
       // humidity
       document.getElementById(
         "humidity"
@@ -209,37 +205,30 @@ function renderProperties() {
       document
         .querySelector(".animated-humidity")
         .setAttribute("value", `${store.humidity}`);
-
       // visability
       document.getElementById(
         "visability"
       ).innerHTML = `${store.visability} км`;
       document.getElementById("car").style.opacity = `${store.visability / 25}`;
-
       // day duration
-      console.log(store.sunrise);
-      console.log(store.sunset);
       document.getElementById("sunrise").innerText = `${
         store.sunrise.split(" ")[0]
       }`;
-
       // converting time to 24-hour format
       let sunset = store.sunset.split(" ")[0];
-
       document.getElementById("sunset").innerText = `${
         +sunset.split(":")[0] + 12
       }:${sunset.split(":")[1]}`;
-
       document.getElementById(
         "day-duration"
       ).innerText = `Продолжительность дня: ${getDayDuration()}`;
-
       // sun animation
       if (state.sun_position != 0) {
         document.getElementById(
           "sun"
         ).style.transform = `rotateZ(${-state.sun_position}deg)`;
       }
+
       let dayDuration = document
         .getElementById("day-duration")
         .innerText.match(/\d+(?=.)/);
@@ -285,18 +274,15 @@ function renderProperties() {
           }
         });
       }
-
       // pressure
       document.getElementById(
         "pressure"
       ).innerHTML = `<img src="Icons/marks/pressure.png" alt="pressure image" />
       ${parseInt(store.pressure * 0.750063755419211)} мм рт. ст.`;
-
       // condition
       document.getElementById(
         "state"
       ).innerHTML = `<img src=${store.condition.icon} alt='condition_day' />${store.condition.text}`;
-
       // custom images
       if (store.condition.text === "Солнечно") {
         document.getElementById(
@@ -362,7 +348,6 @@ function renderProperties() {
       }
 
       // forecast options
-
       forecastBar.addEventListener("click", (event) => {
         if (event.target.classList.value !== "arrow") {
           weatherData.style.opacity = 0;
